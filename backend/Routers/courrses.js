@@ -4,9 +4,6 @@ const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
 const courseRouter = express.Router();
 
-const authentication = require("../middleware/authentication");
-const { createNewCourse,getAllcourses,getCourseById} = require("../Controllers/courses");
-
 
 //add permissions
 courseRouter.post("/createNewCourse",authentication,createNewCourse)

@@ -1,12 +1,6 @@
 const { pool } = require("../models/db")
-
-
-
-
 const createlessons = (req, res) => {
     const { title, video, course } = req.body;
-
-
     pool
         .query(
             `INSERT INTO lessons (title , video , course)
@@ -31,8 +25,6 @@ const createlessons = (req, res) => {
         });
 
 }
-
-
 const getAlllessons = (req, res) => {
     pool
         .query(
@@ -74,7 +66,7 @@ const getlessonsById = (req, res) => {
                 err: err.message,
             });
         });
-
+      }
 
 const deletelessonsById = (req, res) => {
     const { id } = req.params
@@ -101,8 +93,6 @@ const deletelessonsById = (req, res) => {
 const updatelessonsById = (req, res) => {
     const { id } = req.params;
     const { title, video, course } = req.body;
-
-
     pool
         .query("SELECT * FROM lessons WHERE id = $1 AND is_deleted = 0", [id])
         .then((result) => {
@@ -112,10 +102,7 @@ const updatelessonsById = (req, res) => {
                     message: `lessons with id: ${id} not found or deleted`,
                 });
             }
-
-
             const lesson = result.rows[0];
-
             const newTitle = title || lesson.title;
             const newVideo = video || lesson.video;
             const newCourse = course || lesson.course
