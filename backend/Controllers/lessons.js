@@ -1,14 +1,14 @@
-const { pool } = require("../models/db")
+const { pool } = require("../models/db");
 
-const createlessons=(req,res)=>{
-const { title , video , course } = req.body;
+const createlessons = (req, res) => {
+  const { title, video, course } = req.body;
 
   pool
     .query(
       `INSERT INTO lessons (title , video , course)
        VALUES ($1, $2, $3)
        RETURNING *`,
-      [title , video , course]
+      [title, video, course]
     )
     .then((result) => {
       res.status(201).json({
@@ -25,13 +25,11 @@ const { title , video , course } = req.body;
         err: err.message,
       });
     });
-}
+};
 
-const getAlllessons=(req,res)=>{
- pool
-    .query(
-     `SELECT * FROM lessons`
-    )
+const getAlllessons = (req, res) => {
+  pool
+    .query(`SELECT * FROM lessons`)
     .then((result) => {
       res.status(200).json({
         success: true,
@@ -47,13 +45,14 @@ const getAlllessons=(req,res)=>{
         err: err.message,
       });
     });
-}
+};
 
-const getlessonsById=(req,res)=>{
-const {id}=req.params
+const getlessonsById = (req, res) => {
+  const { id } = req.params;
 
-pool.query(`SELECT * FROM users WHERE id`)
-.then((result) => {
+  pool
+    .query(`SELECT * FROM users WHERE id`)
+    .then((result) => {
       res.status(200).json({
         success: true,
         message: `get lessons By Id: ${id} successfully`,
@@ -68,15 +67,14 @@ pool.query(`SELECT * FROM users WHERE id`)
         err: err.message,
       });
     });
+};
 
-}
+const deletelessonsById = (req, res) => {
+  const { id } = req.params;
 
-
-const deletelessonsById=(req,res)=>{
-const {id}=req.params
-
-pool.query(`DELETE FROM users WHERE id `)
-.then((result) => {
+  pool
+    .query(`DELETE FROM users WHERE id `)
+    .then((result) => {
       res.status(200).json({
         success: true,
         message: `Delete lessons By Id: ${id} successfully`,
@@ -91,12 +89,11 @@ pool.query(`DELETE FROM users WHERE id `)
         err: err.message,
       });
     });
-}
+};
 
-
-const updatelessonsById=(req,res)=>{
-const { id } = req.params;
-  const { title , video , course } = req.body;
+const updatelessonsById = (req, res) => {
+  const { id } = req.params;
+  const { title, video, course } = req.body;
 
   pool
     .query("SELECT * FROM lessons WHERE id = $1 AND is_deleted = 0", [id])
@@ -112,12 +109,12 @@ const { id } = req.params;
 
       const newTitle = title || lesson.title;
       const newVideo = video || lesson.video;
-      const newCourse = course || lesson.course
+      const newCourse = course || lesson.course;
 
       return pool
         .query(
           "UPDATE lessons SET title = $1, video = $2, course=$3 WHERE id = $4 RETURNING *",
-          [newTitle, newVideo,newCourse, id]
+          [newTitle, newVideo, newCourse, id]
         )
         .then((updateResult) => {
           res.status(200).json({
@@ -135,12 +132,11 @@ const { id } = req.params;
         err: err.message,
       });
     });
-}
+};
 
-
-
-
-
-module.exports= {
-createlessons,getAlllessons,getlessonsById,deletelessonsById
-}
+module.exports = {
+  createlessons,
+  getAlllessons,
+  getlessonsById,
+  deletelessonsById,
+};
