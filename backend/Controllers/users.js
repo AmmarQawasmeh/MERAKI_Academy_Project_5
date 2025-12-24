@@ -11,16 +11,16 @@ const register = async (req, res) => {
       [firstName, lastName, role, age, email, hashpassowrd, image]
     )
     .then((result) => {
-        console.log(result);
-        
+      console.log(result);
+
       res.status(201).json({
         success: true,
         message: "Account created successfully",
       });
     })
     .catch((err) => {
-        console.log(err);
-        
+      console.log(err);
+
       res.status(409).json({
         success: false,
         message: "The email already exists",
@@ -48,7 +48,7 @@ const login = (req, res) => {
         if (!isPassword) {
           return res.status(403).json({
             success: false,
-            massage: "The email doesn’t exist or the password you’ve entered is incorrect",
+
           });
         }
         const payload = {
@@ -96,7 +96,7 @@ const getAllUsers = (req, res) => {
         });
       }
     })
-    .catch((err) => {});
+    .catch((err) => { });
 };
 const updateUserById = async (req, res) => {
   const { userId } = req.parms;
@@ -123,10 +123,10 @@ const updateUserById = async (req, res) => {
     });
 };
 
-const deleteUserById=(req,res)=>{
-const {id}=req.params
-pool.query(`DELETE FROM users WHERE id = $1 `, [id])
-.then((result) => {
+const deleteUserById = (req, res) => {
+  const { id } = req.params
+  pool.query(`DELETE FROM users WHERE id = $1 `, [id])
+    .then((result) => {
       res.status(200).json({
         success: true,
         message: `Delete users By Id: ${id} successfully`,

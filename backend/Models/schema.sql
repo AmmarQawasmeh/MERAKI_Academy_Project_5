@@ -18,3 +18,30 @@ CREATE TABLE roles (
     role VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
+
+
+CREATE TABLE courses (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(250) NOT NULL,
+  description TEXT,
+  image VARCHAR(250),
+  instructorId INT REFERENCES users(id) ON DELETE SET NULL,
+  startCourse TIMESTAMP,
+  endCourse TIMESTAMP
+);
+
+
+CREATE TABLE lessons (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(250) NOT NULL,
+  video VARCHAR(255),
+  course INT REFERENCES courses(id) ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE students_courses (
+  id SERIAL PRIMARY KEY,
+  student INT REFERENCES users(id) ON DELETE CASCADE,
+  course INT REFERENCES courses(id) ON DELETE CASCADE
+);
