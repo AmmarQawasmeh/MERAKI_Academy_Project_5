@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
@@ -7,11 +8,29 @@ import Home from './component/home';
 function App() {
 
 
+const App = () => {
   return (
-    <div>
-     <Routes>
-        <Route path="/" element={<Home />} />
-        </Routes>
+    <
+
+<Link to="/">Home</Link>
+<Link to="/about"> About </Link>
+
+
+
+      <Routes>
+        <Route path="/about" element={<About />} />
+
+        <Route path='/' element= {<Home/>}/>
+
+
+
+
+
+
+
+      </Routes>
+    
+
     </div>
   )
 }
