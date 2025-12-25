@@ -49,7 +49,7 @@ const getAlllessons = (req, res) => {
 
 const getlessonsById = (req, res) => {
     const { id } = req.params
-    pool.query(`SELECT * FROM lessons WHERE id`,[id])
+    pool.query(`SELECT * FROM lessons WHERE id=$1`, [id])
 
 
         .then((result) => {
@@ -67,18 +67,18 @@ const getlessonsById = (req, res) => {
                 err: err.message,
             });
         });
-      }
+}
 
 const deletelessonsById = (req, res) => {
     const { id } = req.params
 
 
-    pool.query(`DELETE FROM lessons WHERE id=$1 `,[id])
+    pool.query(`DELETE FROM lessons WHERE id=$1 `, [id])
         .then((result) => {
             res.status(200).json({
                 success: true,
-                message: `Delete lessons By Id: ${id} successfully`,
-                articles: result.rows,
+                message: `Delete lessons Id: ${id} successfully`,
+                lessons: result.rows,
             });
         })
         .catch((err) => {
@@ -95,7 +95,7 @@ const updatelessonsById = (req, res) => {
     const { id } = req.params;
     const { title, video, course } = req.body;
     pool
-        .query("SELECT * FROM lessons WHERE id = $1 AND is_deleted = 0", [id])
+        .query("SELECT * FROM lessons WHERE id = $1", [id])
         .then((result) => {
             if (result.rows.length === 0) {
                 return res.status(404).json({
