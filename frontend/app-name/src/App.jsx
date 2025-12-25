@@ -10,8 +10,7 @@ function App() {
 
 const App = () => {
   return (
-    <
-
+    <div>
 <Link to="/">Home</Link>
 <Link to="/about"> About </Link>
 
@@ -22,17 +21,11 @@ const App = () => {
 
         <Route path='/' element= {<Home/>}/>
 
-
-
-
-
-
-
       </Routes>
     
 
     </div>
   )
 }
-
+}
 export default App
