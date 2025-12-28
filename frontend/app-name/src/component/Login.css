@@ -1,0 +1,161 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+}
+
+
+.navbar {
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+.navbar ul li {
+  cursor: pointer;
+  color: #444;
+}
+
+.navbar .auth-buttons button {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #6d5dfc;
+  background: transparent;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.navbar .auth-buttons .register {
+  background: #6d5dfc;
+  color: white;
+}
+
+
+.login-container {
+  flex: 1;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.login-box {
+  background: white;
+  padding: 35px 40px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.login-box h1 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.login-box h2 {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-box label {
+  font-size: 13px;
+  color: #555;
+  text-align: left;
+}
+
+.login-box input {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.3s;
+}
+
+.login-box input:focus {
+  border-color: #6d5dfc;
+  box-shadow: 0 0 0 2px rgba(109, 93, 252, 0.15);
+}
+
+
+.login-box button {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #6d5dfc, #8b7cff);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(109, 93, 252, 0.3);
+}
+
+
+.login-box .terms {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #777;
+}
+
+.login-box .register-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-box .register-link span {
+  color: #6d5dfc;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+@media (max-width: 480px) {
+  .login-box {
+    padding: 25px;
+  }
+
+  .navbar ul {
+    display: none;
+  }
+}
+.login{
+   width: 1000px;  
+   display: flex;
+margin-left: 100px;
+}

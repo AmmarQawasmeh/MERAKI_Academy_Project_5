@@ -1,0 +1,110 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  display: flex;
+  flex-direction: column;
+}
+
+
+.register-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.register-card {
+  background: white;
+  padding: 35px 40px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.register-card h2 {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.register-card h1 {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+
+.register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.register-card label {
+  font-size: 13px;
+  color: #555;
+  text-align: left;
+}
+
+.register-card input {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.3s;
+}
+
+.register-card input:focus {
+  border-color: #6d5dfc;
+  box-shadow: 0 0 0 2px rgba(109, 93, 252, 0.15);
+}
+
+.register-card button {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #6d5dfc, #8b7cff);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.register-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(109, 93, 252, 0.3);
+}
+
+.register-card p {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #777;
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 25px;
+  }
+
+  nav ul {
+    display: none;
+  }
+}
+.register{
+   width: 1000px;
+  display: flex;
+}
+.register-logo{
+    margin-top: -300px;
+}
