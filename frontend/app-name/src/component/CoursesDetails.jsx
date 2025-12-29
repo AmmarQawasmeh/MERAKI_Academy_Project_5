@@ -1,29 +1,56 @@
-import React from 'react'
+import "./CoursesDetails.css";
 
-const CoursesDetails = () => {
+const CourseDetails =()=> {
   return (
-     <div className="course-card">
-      <img  alt="" className="course-img" />
-      <div className="course-content">
-        <h4 className="course-title"></h4>
+    <div className="course-page">
+      <div className="course-card">
+        <img
+          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+          alt="course"
+          className="course-image"
+        />
 
-        <div className="course-meta">
-          <span> Lessons</span>
-          <span>  Students</span>
-        </div>
-        <div className="course-rating">
-           <small>( Reviews)</small>
-        </div>
-        <div className="course-footer">
-          <div className="instructor">
-            <img  alt="" />
-            <span>hh</span>
+        <div className="course-info">
+          <h2>HEADLINE FOR THE COURSE</h2>
+          <p>
+            Short course description goes here. Explain what the student will
+            learn from this course.
+          </p>
+
+          <div className="course-meta">
+            <span>⏱ 10h</span>
+            <span>⭐ 4.5</span>
+            <span>👥 120 students</span>
           </div>
-          <span className="price">$</span>
+
+          <button className="start-btn">Start Course</button>
+        </div>
+      </div>
+      <div className="course-content">
+        <div className="lessons">
+          <h3>Course Outline</h3>
+          Lesson One Name <br></br>
+            Lesson Two Name<br></br>
+            Lesson Three Name<br></br>
+            Lesson Four Name<br></br>
+            Lesson Five Name<br></br>
+            Lesson Six Name<br></br>
+        </div>
+        <div className="instructor">
+          <img
+            src="https://randomuser.me/api/portraits/men/32.jpg"
+            alt="instructor"
+          />
+          <h4>Ali alzawawi</h4>
+          <p>civil engineer.</p>
+          <div className="social">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-export default CoursesDetails
+export default CourseDetails 

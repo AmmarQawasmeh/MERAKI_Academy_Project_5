@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Unauthorized from "./component/Unauthorized";
 import Courses from "./component/Courses";
 import CoursesDetails from "./component/CoursesDetails";
+import Navbar from "./component/navbar";
 
 const App = () => {
   return (

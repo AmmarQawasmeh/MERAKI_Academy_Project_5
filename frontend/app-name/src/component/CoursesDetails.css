@@ -1,0 +1,119 @@
+.course-page {
+    margin-left: -100px;
+    width: 1400px;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+
+.course-card {
+  display: flex;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.course-image {
+  width: 45%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.course-info {
+  flex: 1;
+}
+
+.course-info h2 {
+  margin-bottom: 10px;
+}
+
+.course-info p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.course-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.start-btn {
+  background: #6c4cff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.start-btn:hover {
+  background: #5537e6;
+}
+
+.course-content {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+
+.lessons {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.lessons h3 {
+  margin-bottom: 15px;
+}
+
+.lesson-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f2f3f7;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.lesson-item:hover {
+  background: #e6e8ff;
+}
+
+.instructor {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.instructor img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.instructor h4 {
+  margin-bottom: 5px;
+}
+
+.instructor p {
+  font-size: 14px;
+  color: #666;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  font-size: 20px;
+}
