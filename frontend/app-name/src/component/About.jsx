@@ -95,7 +95,7 @@ const About = () => {
           </div>
 
           <div className="about-section mb-4">
-            <h3>Our Message</h3>
+            <h3>📩 Our Message</h3>
             <p>
               Providing accessible and easy-to-understand education helps
               students build confidence and achieve better academic results.
@@ -103,7 +103,7 @@ const About = () => {
           </div>
 
           <div className="about-section mb-4">
-            <h3>Our Vision</h3>
+            <h3>🎯 Our Vision</h3>
             <p>
               To be a trusted educational platform that accompanies students
               throughout their academic journey from beginning to success.
@@ -111,34 +111,34 @@ const About = () => {
           </div>
 
           <div className="about-section mb-4">
-            <h3>Our Services</h3>
+            <h3>🛠 Our Services</h3>
             <ul>
-              <li>Simplified lessons for all subjects</li>
-              <li>Clear explanation in videos</li>
-              <li>Suitable content for every stage</li>
-              <li>Easy to use interface</li>
+              <li>📘 Simplified lessons for all subjects</li>
+              <li>🎥 Clear explanation in videos</li>
+              <li>🎓 Suitable content for every stage</li>
+              <li>🧭 Easy to use interface</li>
             </ul>
           </div>
 
           <div className="about-section">
-            <h3>Contact Information</h3>
+            <h3>📞 Contact Information</h3>
 
-            <p className="mb-1 fw-bold">Emails</p>
+            <p className="mb-1 fw-bold">📧 Emails</p>
             <ul>
-              <li>khaledalsous.ahmed@gmail.com</li>
-              <li>ammaar.qawasmeh@gmail.com</li>
-              <li>alzawawe.ali@gmail.com</li>
+              <li>📨 khaledalsous.ahmed@gmail.com</li>
+              <li>📨 ammaar.qawasmeh@gmail.com</li>
+              <li>📨 alzawawe.ali@gmail.com</li>
             </ul>
 
-            <p className="mb-1 fw-bold">Phones</p>
+            <p className="mb-1 fw-bold">📱 Phones </p>
             <ul>
-              <li>Ammar : 0780988747</li>
-              <li>Ahmad : 0781234567</li>
-              <li>Ali : 0790123456</li>
+              <li>👤 Ammar : 0780988747</li>
+              <li>👤 Ahmad : 0781234567</li>
+              <li>👤 Ali : 0790123456</li>
             </ul>
 
             <p className="fw-bold">
-              Location: <span>Jordan - Amman</span>
+              📍 Location: <span>Jordan - Amman</span>
             </p>
           </div>
         </div>
