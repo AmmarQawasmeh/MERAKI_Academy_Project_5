@@ -13,11 +13,15 @@ import Unauthorized from "./component/Unauthorized";
 import Courses from "./component/Courses";
 import CoursesDetails from "./component/CoursesDetails";
 import Navbar from "./component/navbar";
+
 import Footer from "./component/Footer ";
+import Page404 from "./component/Page404";
+
 
 const App = () => {
   return (
     <div>
+      <Navbar />
       <Routes>
         <Route path="/about" element={<About />} />
         <Route path="/" element={<Home />} />
@@ -26,6 +30,7 @@ const App = () => {
         <Route path="/courseDetails" element={<CoursesDetails />} />
         <Route path="/register" element={<Rigester />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/*" element={<Page404/>}/>
       </Routes>
       <Footer/>
     </div>
