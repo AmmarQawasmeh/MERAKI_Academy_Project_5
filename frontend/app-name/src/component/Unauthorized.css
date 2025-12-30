@@ -1,24 +1,25 @@
 .unauth-wrapper {
   min-height: 90vh;
-  background-color: #cfe8f3;
+  background-color: #6c28d972;
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .unauth-card {
   background: #ffffff;
   width: 600px;
-  border-radius: 14px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
 
 .browser-bar {
-  background-color: #0d6efd;
+  background-color: #c76fd4;
   padding: 10px;
   display: flex;
   gap: 8px;
+  
 }
 
 .browser-bar span {
@@ -42,14 +43,14 @@
 .unauth-code {
   font-size: 96px;
   font-weight: bold;
-  color: #ef124d;
+  color: #982a98;
   margin: 0;
 }
 
 .unauth-title {
   font-size: 28px;
   margin: 10px 0;
-  color: #df1111;
+  color: #df1111c0;
 }
 
 .unauth-text {
@@ -58,16 +59,4 @@
   margin-bottom: 30px;
 }
 
-.unauth-btn {
-  text-decoration: none;
-  background-color: #0d6efd;
-  color: white;
-  padding: 12px 26px;
-  border-radius: 8px;
-  font-size: 15px;
-  transition: 0.3s ease;
-}
 
-.unauth-btn:hover {
-  background-color: #0b5ed7;
-}
