@@ -17,6 +17,7 @@ import Profile from "./component/Profile";
 
 import Footer from "./component/Footer ";
 import Page404 from "./component/Page404";
+import Favourite from "./component/Favourite";
 
 
 const App = () => {
@@ -33,6 +34,8 @@ const App = () => {
         <Route path="/register" element={<Rigester />} />
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<Page404/>}/>
+        <Route path="/favourite" element={<Favourite />} />
+
       </Routes>
       <Footer/>
     </div>
