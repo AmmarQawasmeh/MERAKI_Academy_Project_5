@@ -14,9 +14,9 @@ import Courses from "./component/Courses";
 import CoursesDetails from "./component/CoursesDetails";
 import Navbar from "./component/navbar";
 import Profile from "./component/Profile";
-
 import Footer from "./component/Footer ";
 import Page404 from "./component/Page404";
+import Lesson from "./component/Lesson";
 
 
 const App = () => {
@@ -25,6 +25,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/about" element={<About />} />
+                <Route path="/lesson" element={<Lesson />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Home />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
