@@ -6,91 +6,33 @@ import { useEffect } from "react";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {setCourses} from "../redux/coursesSlice"
+import { setCourses } from "../redux/coursesSlice";
+import { jwtDecode } from "jwt-decode";
+
 const Courses = () => {
-    const navigate = useNavigate();
-     const dispatch = useDispatch();
-  /*
-  //const headers = {}
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const getAllCourses = () => {
     axios
-      .get(`http://localhost:5000/getAllcourses`, {headers})
+      .get(`http://localhost:5000/courses/getAllcourses`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((result) => {
-       setCourses(result.rows);
+        dispatch(setCourses(result.rows));
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(allCourses);
-  
- useEffect(() => {
+  const courses = useSelector((state) => state.courses.courses);
+  useEffect(() => {
     getAllCourses();
-  }, [allCourses])*/
-  const courses = [
-    {
-      title: "Graphic Design Essentials",
-      lessons: 8,
-      students: 50,
-      price: 250,
-      image: "https://ifda.in/img/graphic-mobile-banner.jpg",
-    },
-    {
-      title: "Python for Data Science",
-      lessons: 10,
-      students: 60,
-      price: 150,
-      image: "https://img-c.udemycdn.com/course/750x422/2314160_8d61_6.jpg",
-    },
-    {
-      title: "Full-Stack Web Development",
-      lessons: 12,
-      students: 80,
-      price: 299,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq2kXQ160NtpDaqElV1m7BMwaDSwezpFO7mA&s",
-    },
-    {
-      title: "UI/UX Design for Beginners",
-      lessons: 6,
-      students: 30,
-      price: 350,
-      image:
-        "https://www.uxdesigninstitute.com/blog/wp-content/uploads/2024/11/101_UX_vs_UI_illustration_blog-1.png",
-    },
-    {
-      title: "UI/UX Design for Beginners",
-      lessons: 6,
-      students: 30,
-      price: 350,
-      image:
-        "https://www.uxdesigninstitute.com/blog/wp-content/uploads/2024/11/101_UX_vs_UI_illustration_blog-1.png",
-    },
-    {
-      title: "UI/UX Design for Beginners",
-      lessons: 6,
-      students: 30,
-      price: 350,
-      image:
-        "https://www.uxdesigninstitute.com/blog/wp-content/uploads/2024/11/101_UX_vs_UI_illustration_blog-1.png",
-    },
-    {
-      title: "UI/UX Design for Beginners",
-      lessons: 6,
-      students: 30,
-      price: 350,
-      image:
-        "https://www.uxdesigninstitute.com/blog/wp-content/uploads/2024/11/101_UX_vs_UI_illustration_blog-1.png",
-    },
-    {
-      title: "UI/UX Design for Beginners",
-      lessons: 6,
-      students: 30,
-      price: 350,
-      image:
-        "https://www.uxdesigninstitute.com/blog/wp-content/uploads/2024/11/101_UX_vs_UI_illustration_blog-1.png",
-    },
-  ];
+  }, [courses]);
+  console.log(courses);
+  console.log(localStorage.getItem(""));
 
   return (
     <div>
@@ -107,9 +49,13 @@ const Courses = () => {
         <div className="courses-grid">
           {courses.map((course, index) => (
             <div className="course-card" key={index}>
-              <img onClick={()=>{
-                navigate("/courseDetails")
-              }} src={course.image} alt={course.title} />
+              <img
+                onClick={() => {
+                  navigate("/courseDetails");
+                }}
+                src={course.image}
+                alt={course.title}
+              />
               <h3>{course.title}</h3>
               <p>
                 {course.lessons} Lessons • {course.students} Students

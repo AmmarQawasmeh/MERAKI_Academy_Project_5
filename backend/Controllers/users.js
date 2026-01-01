@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { pool } = require("../models/db");
-
 const register = async (req, res) => {
   const { firstName, lastName, role, age, email, password, image } = req.body;
   const hashpassowrd = await bcrypt.hash(password, 10);
@@ -12,7 +11,6 @@ const register = async (req, res) => {
     )
     .then((result) => {
       console.log(result);
-
       res.status(201).json({
         success: true,
         message: "Account created successfully",
@@ -20,7 +18,6 @@ const register = async (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-
       res.status(409).json({
         success: false,
         message: "The email already exists",
@@ -29,9 +26,8 @@ const register = async (req, res) => {
     });
 };
 
+
 const login = (req, res) => {
-  
-  
   const { email, password } = req.body;
   pool
     .query(
@@ -125,7 +121,25 @@ const updateUserById = async (req, res) => {
       });
     });
 };
-
+const getUserById = (req, res) => {
+  id = req.params.id;
+  pool
+    .query(`SELECT * FROM users WHERE ${id} =$1`, [id])
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        course: result.rows,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
+};
 const deleteUserById = (req, res) => {
   const { id } = req.params
   pool.query(`DELETE FROM users WHERE id = $1 `, [id])
@@ -151,5 +165,6 @@ module.exports = {
   login,
   getAllUsers,
   updateUserById,
-  deleteUserById
+  deleteUserById,
+  getUserById
 };

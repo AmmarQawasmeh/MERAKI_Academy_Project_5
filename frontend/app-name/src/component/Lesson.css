@@ -1,0 +1,55 @@
+.lesson-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #f8f9ff;
+  margin-bottom: 12px;
+}
+
+.lesson-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lesson-dot {
+  width: 10px;
+  height: 10px;
+  background: #7b2cbf;
+  border-radius: 50%;
+}
+
+.lesson-item h4 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.lesson-item p {
+  font-size: 12px;
+  color: #777;
+  margin: 2px 0 0;
+}
+
+.lesson-status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.lesson-status.completed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.lesson-status.inprogress {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.lesson-status.locked {
+  background: #fee2e2;
+  color: #991b1b;
+}

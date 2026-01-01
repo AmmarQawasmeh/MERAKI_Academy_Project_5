@@ -1,6 +1,33 @@
 import "./CoursesDetails.css";
+import { useDispatch, useSelector } from "react-redux";
+import Lesson from "./Lesson";
+import { useNavigate } from "react-router-dom";
 
 const CourseDetails = () => {
+    const navigate = useNavigate();
+   const lessons = [
+    { id: 1, title: "Introduction to Course", duration: "5 min", status: "completed" },
+    { id: 2, title: "HTML Basics", duration: "15 min", status: "completed" },
+    { id: 3, title: "CSS Fundamentals", duration: "20 min", status: "inprogress" },
+    { id: 4, title: "JavaScript Basics", duration: "25 min", status: "locked" },
+  ];
+  const dispatch = useDispatch();
+  const getCourseById = () => {
+    const id = localStorage.getItem("token.");
+    axios
+      .get(`http://localhost:5000/courses/getCourseById/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        dispatch(setCourses(result.rows));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="course-page">
       <div className="coursedetails-card">
@@ -9,7 +36,6 @@ const CourseDetails = () => {
           alt="course"
           className="course-image"
         />
-
         <div className="course-info">
           <h2>HEADLINE FOR THE COURSE</h2>
           <p>
@@ -18,25 +44,22 @@ const CourseDetails = () => {
             temporibus tenetur nam dolor, nostrum commodi, rerum ad! Veritatis,
             eveniet voluptates.wewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
           </p>
-
           <div className="course-meta">
             <span>⏱ 10h</span>
             <span>⭐ 4.5</span>
             <span>👥 120 students</span>
           </div>
-
           <button className="start-btn">Start Course</button>
         </div>
       </div>
       <div className="course-content">
         <div className="lessons">
           <h3>Course Outline</h3>
-          Lesson One Name <br></br>
-          Lesson Two Name<br></br>
-          Lesson Three Name<br></br>
-          Lesson Four Name<br></br>
-          Lesson Five Name<br></br>
-          Lesson Six Name<br></br>
+           <div  className="lesson-list">
+        {lessons.map((lesson) => (
+         <p onClick={() =>  navigate("/lesson")}><Lesson  key={lesson.id} {...lesson}   /></p> 
+        ))}
+      </div>
         </div>
         <div className="instructor">
           <img
