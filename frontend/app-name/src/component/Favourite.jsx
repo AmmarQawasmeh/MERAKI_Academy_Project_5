@@ -9,46 +9,33 @@ function Favourite() {
   );
 
   return (
-    <div className="favourite-section">
+    <div className="unauth-wrapper">
 
       {favouriteCourses.length === 0 ? (
-        <div className="favourite-empty">
-          <div className="unauth-wrapper">
-            <div className="unauth-card">
-              <div className="browser-bar">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-
-              <div className="unauth-content">
-                <div className="unauth-emoji"></div>
-          <h1>Favourite Courses ❤️</h1>
-
-                <h2 className="unauth-title">No favourite courses yet</h2>
-
-                <p className="unauth-text">
-         
-                </p>
-              </div>
-            </div>
+        <div className="unauth-card">
+          <div className="browser-bar">
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
 
+          <div className="unauth-content">
+            <div className="unauth-emoji"></div>
+            <h1>Favourite Courses ❤️</h1>
+            <h2 className="unauth-title">No favourite courses yet</h2>
+            <p className="unauth-text"></p>
+          </div>
         </div>
       ) : (
-        <div className="favourite-grid">
+        <div className="unauth-grid">
           {favouriteCourses.map((course) => (
-            <div className="favourite-card" key={course.id}>
+            <div className="unauth-card" key={course.id}>
               <img src={course.image} alt={course.title} />
-
               <h3>{course.title}</h3>
               <p>{course.description}</p>
 
-              <div className="favourite-bottom">
-                <span className="price">
-                  ${course.price}
-                </span>
-
+              <div className="unauth-bottom">
+                <span className="price">${course.price}</span>
                 <button
                   className="remove-btn"
                   onClick={() =>

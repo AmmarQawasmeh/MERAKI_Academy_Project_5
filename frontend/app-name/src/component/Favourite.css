@@ -1,68 +1,73 @@
-.favourite-section {
-  padding: 40px;
-  width: 100%;
-  background-color: #4B3F72;
-  color: white;
-  text-align: center;
-  
+.unauth-wrapper {
+  min-height: 90vh;
+  background-color: #6c28d972;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.favourite-section h1 {
-  margin-bottom: 30px;
-}
-
-.favourite-empty {
-  font-size: 18px;
-}
-
-.favourite-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+.unauth-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
 }
 
-.favourite-card {
-  background: #8E7CC3;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: left;
+.unauth-card {
+  background: #ffffff;
+  width: 300px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
-.favourite-card img {
+.unauth-card img {
   width: 100%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
 }
 
-.favourite-card h3 {
-  margin: 10px 0;
-  font-size: 16px;
+.unauth-card h3 {
+  font-size: 22px;
+  margin: 15px 0 5px 0;
+  color: #111827;
 }
 
-.favourite-card p {
-  font-size: 13px;
+.unauth-card p {
+  font-size: 14px;
+  color: #555555;
+  margin: 0 20px 15px 20px;
 }
 
-.favourite-bottom {
+.unauth-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
 }
 
-.remove-btn {
-  background: rgba(255,255,255,0.2);
+.unauth-bottom .price {
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.unauth-bottom .remove-btn {
+  padding: 6px 12px;
+  background-color: #f87171;
+  color: #fff;
   border: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  color: white;
+  border-radius: 999px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-.remove-btn:hover {
-  background: white;
-  color: #7e3bbd;
+.unauth-bottom .remove-btn:hover {
+  background-color: #dc2626;
 }
-
-
