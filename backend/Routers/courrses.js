@@ -4,6 +4,7 @@ const {
   getAllcourses,
   getCourseById,
   deleteCoursesById,
+  updateCourseById,
 } = require("../Controllers/courses");
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
@@ -18,5 +19,6 @@ courseRouter.delete(
   authentication,
   deleteCoursesById
 );
+courseRouter.put("/update/:id",authentication, updateCourseById)
 
 module.exports = courseRouter;

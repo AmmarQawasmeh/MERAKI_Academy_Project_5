@@ -10,12 +10,31 @@ function Favourite() {
 
   return (
     <div className="favourite-section">
-      <h1>Favourite Courses ❤️</h1>
 
       {favouriteCourses.length === 0 ? (
-        <p className="favourite-empty">
-          No favourite courses yet
-        </p>
+        <div className="favourite-empty">
+          <div className="unauth-wrapper">
+            <div className="unauth-card">
+              <div className="browser-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div className="unauth-content">
+                <div className="unauth-emoji"></div>
+          <h1>Favourite Courses ❤️</h1>
+
+                <h2 className="unauth-title">No favourite courses yet</h2>
+
+                <p className="unauth-text">
+         
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
       ) : (
         <div className="favourite-grid">
           {favouriteCourses.map((course) => (

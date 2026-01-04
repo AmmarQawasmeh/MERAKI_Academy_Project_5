@@ -2,11 +2,11 @@ const express = require("express");
 const { pool } = require("../models/db");
 
 const createNewCourse = (req, res) => {
-  const { title, description, image, instructorId, stratCourse, endCourse} = req.body;
+  const { title, description, image, instructorId, startCourse, endCourse, price, rate } = req.body;
   pool
     .query(
-      `INSERT INTO courses (title,description,image,instructorId,startCourse,endCourse) VALUES ($1,$2,$3,$4,$5,$6)`,
-      [title, description, image, instructorId, stratCourse, endCourse]
+      `INSERT INTO courses (title,description,image,instructorId,startCourse,endCourse, price,rate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+      [title, description, image, instructorId, startCourse, endCourse, price, rate]
     )
     .then((result) => {
       res.status(201).json({
@@ -72,7 +72,7 @@ const deleteCoursesById = (req, res) => {
       res.status(200).json({
         success: true,
         message: `Delete courses By Id: ${id} successfully`,
-        articles: result.rows,
+        courses: result.rows,
       });
     })
     .catch((err) => {
@@ -85,12 +85,27 @@ const deleteCoursesById = (req, res) => {
     });
 };
 const updateCourseById = (req, res) => {
-  const { course_id } = req.params.id;
-  const { title, description, image, instructorId, strat, end } = req.body;
+  const { id } = req.params;
+  const { title, description, image, instructorId, startCourse, endCourse, price, rate } = req.body;
   pool.query(
-    `UPDATE course SET title = COALESCE($1,title) , description = COALESCE($2,description) , image = COALESCE($3,image) , instructorId = COALESCE($4,instructorId) , strat =COALESCE($5,strat),end =COALESCE($6,end) WHERE course_id = $7 `,
-    [title, description, image, instructorId, strat, end, course_id]
-  );
+    `UPDATE courses SET title = COALESCE($1,title) , description = COALESCE($2,description) , image = COALESCE($3,image) , instructorId = COALESCE($4,instructorId) , startCourse =COALESCE($5,startCourse) , endCourse =COALESCE($6,endCourse) ,price=COALESCE($7,price), rate=COALESCE($8,rate) WHERE id = $9 `,
+    [title, description, image, instructorId, startCourse, endCourse, price, rate, id]
+  )
+  .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: `Update courses By Id: ${id} successfully`,
+        courses: result.rows,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
 };
 
 

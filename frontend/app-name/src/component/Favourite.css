@@ -1,11 +1,10 @@
-/* Favourite Page */
-
 .favourite-section {
   padding: 40px;
   width: 100%;
   background-color: #4B3F72;
   color: white;
   text-align: center;
+  
 }
 
 .favourite-section h1 {
@@ -14,10 +13,8 @@
 
 .favourite-empty {
   font-size: 18px;
-  opacity: 0.8;
 }
 
-/* نفس ستايل الكورسات */
 .favourite-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -45,7 +42,6 @@
 
 .favourite-card p {
   font-size: 13px;
-  opacity: 0.8;
 }
 
 .favourite-bottom {
@@ -68,3 +64,5 @@
   background: white;
   color: #7e3bbd;
 }
+
+
