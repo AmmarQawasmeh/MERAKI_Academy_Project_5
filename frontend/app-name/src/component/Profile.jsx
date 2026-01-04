@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourses } from "../redux/coursesSlice";
 import { jwtDecode } from "jwt-decode";
+
+
 const Profile = () => {
   const [user, setuser] = useState({});
   const decodedToken = jwtDecode(localStorage.getItem("token"));
