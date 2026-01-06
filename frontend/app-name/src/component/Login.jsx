@@ -8,6 +8,7 @@ import "./login.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, setUserId } from "../redux/auth";
+
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -15,15 +16,22 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  
 
   const handleLogin = () => {
     const body = { email, password };
     axios
       .post("http://localhost:5000/users/login", body)
       .then((res) => {
-        dispatch(login(res.data.token));
+        dispatch(
+          login({
+            token: res.data.token,
+            role: res.data.role,
+            userId: res.data.userId,
+          })
+        );
         navigate("/");
+
+        
       })
       .catch((err) => {
         console.log(err);
@@ -65,8 +73,9 @@ const Login = () => {
             </label>
             <br />
 
-
-            <button onClick={handleLogin} className="login-box button">login</button>
+            <button onClick={handleLogin} className="login-box button">
+              login
+            </button>
             <br />
             <p className="terms">
               By continuing, you agree to our Terms and Privacy Policy.

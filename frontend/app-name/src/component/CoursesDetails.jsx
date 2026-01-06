@@ -5,100 +5,133 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
+import {
+  selectRole,
+  selectIsAdmin,
+  selectIsTeacher,
+} from "../redux/selectors";
+
 const CourseDetails = () => {
-  const [role, setrole] = useState("");
-  const [isAdmin, setisAdmin] = useState(false);
+  const navigate = useNavigate();
+
+  const role = useSelector(selectRole);
+  const isAdmin = useSelector(selectIsAdmin);
+  const isTeacher = useSelector(selectIsTeacher);
+  const courseId = useSelector((state) => state.courseDetails.courseId);
+
   const [course, setCourse] = useState(null);
   const [user, setUser] = useState(null);
-  const [lessons, setLessons] = useState(null);
-  const navigate = useNavigate();
-  const id = useSelector((state) => state.courseDetails.courseId);
-  const getCourseById = () => {
-    axios
-      .get(`http://localhost:5000/courses/getCourseById/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((result) => setCourse(result.data.course))
-      .catch((err) => console.log(err));
+  const [lessons, setLessons] = useState([]);
+
+  const getCourseById = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/courses/getCourseById/${courseId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setCourse(res.data.course);
+    } catch (err) {
+      console.log(err);
+    }
   };
-  const getUserById = (instructorId) => {
+
+  const getUserById = async (instructorId) => {
     if (!instructorId) return;
-    axios
-      .get(`http://localhost:5000/users/${instructorId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((res) => {
-        setUser(res.data.user);
-        setrole(res.data.user.role);
-        setisAdmin(res.data.user.role === 1);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/users/${instructorId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setUser(res.data.user);
+    } catch (err) {
+      console.log(err);
+    }
   };
-  const getLessonsByCourseId = (courseId) => {
+
+  const getLessonsByCourseId = async (courseId) => {
     if (!courseId) return;
-    axios
-      .get(`http://localhost:5000/lessons/getlessonbyCourseId/${courseId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((result) => {
-        console.log(result.data.lessons);
-        setLessons(result.data.lessons);
-      })
-      .catch((err) => console.log(err));
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/lessons/getlessonbyCourseId/${courseId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setLessons(res.data.lessons);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  const deleteCourseById = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:5000/courses/deleteCoursesById/${courseId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      navigate("/Courses");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    getCourseById();
-  }, [id]);
+    if (courseId) getCourseById();
+  }, [courseId]);
+
   useEffect(() => {
     if (course) {
       getUserById(course.instructorid);
-    }
-  }, [course]);
-  useEffect(() => {
-    if (course) {
       getLessonsByCourseId(course.id);
     }
   }, [course]);
+
   let diffDays = 0;
-  if (course && course.startcourse && course.endcourse) {
+  if (course?.startcourse && course?.endcourse) {
     const start = new Date(course.startcourse);
     const end = new Date(course.endcourse);
     diffDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
   }
-  console.log(role);
-const deleteCoursesById = () => {
-  axios
-    .delete(`http://localhost:5000/courses/deleteCoursesById/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    .then(() => {
-     
-      navigate("/Courses"); 
-    })
-    .catch((err) => {
-      console.log(err);
-     
-    });
-};
+
+  console.log("ROLE:", role);
+  console.log("IS ADMIN:", isAdmin);
+  console.log("IS TEACHER:", isTeacher);
 
   if (!course) return <p>Loading course...</p>;
+
   return (
     <div className="course-page">
       <div className="coursedetails-card">
         <img src={course.image} alt="course" className="course-image" />
+
         <div className="course-info">
           <h2>{course.title}</h2>
           <p>{course.description}</p>
+
           <div className="course-meta">
             <span>⏱ {diffDays} days</span>
             <span>⭐ {course.rate}</span>
             <span>$ {course.price}</span>
           </div>
+
           <button className="start-btn">Start Course</button>
         </div>
-        {isAdmin ? (
+
+        {isAdmin && (
           <div>
             <button
               className="update-btn"
@@ -107,18 +140,20 @@ const deleteCoursesById = () => {
               Update Course
             </button>
 
-            <button className="delete-btn" onClick={() => {deleteCoursesById()}}>
+            <button className="delete-btn" onClick={deleteCourseById}>
               Delete Course
             </button>
           </div>
-        ) : null}
+        )}
       </div>
+
       <div className="course-content">
         <div className="lessons">
           <h3>Course Outline</h3>
+
           <div className="lesson-list">
-            {lessons && lessons.length > 0 ? (
-              lessons.map((lesson, index) => (
+            {lessons.length > 0 ? (
+              lessons.map((lesson) => (
                 <Lesson
                   key={lesson.id}
                   title={lesson.title}
@@ -131,6 +166,7 @@ const deleteCoursesById = () => {
             )}
           </div>
         </div>
+
         {user && (
           <div className="instructor">
             <img src={user.image} alt="instructor" />
