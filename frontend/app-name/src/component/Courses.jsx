@@ -14,6 +14,9 @@ const Courses = () => {
   
   const courses = useSelector((state) => state.courses.courses);
   console.log(courses);
+  useEffect(()=>{
+    courses
+  },[])
   return (
     <div>
       <section className="courses-section">
