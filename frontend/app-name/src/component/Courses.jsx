@@ -13,10 +13,20 @@ const Courses = () => {
   const dispatch = useDispatch();
   
   const courses = useSelector((state) => state.courses.courses);
-  console.log(courses);
-  useEffect(()=>{
-    courses
-  },[])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/courses/getAllcourses", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        dispatch(setCourses(result.data.allcourses));
+      })
+      .catch((err) => console.log(err));
+  }, [dispatch]);
+
   return (
     <div>
       <section className="courses-section">
