@@ -163,6 +163,14 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+
+                </Button>     <button onClick={() => navigate("/dashboard")}>Admin Dashboard</button>
+                
+              </div>
+            </div>
+
+
+            
           ) : (
             <>
               <Button className="btn-btn" onClick={() => navigate("/login")}>
