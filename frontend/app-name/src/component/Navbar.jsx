@@ -66,6 +66,8 @@ const Navbar = () => {
               </div>
             </div>
 
+
+            </Button>     
           ) : (
             <>
               <Button className="btn-btn" onClick={() => navigate("/login")}>Login <TbLogin /></Button>
