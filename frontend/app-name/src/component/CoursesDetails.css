@@ -16,14 +16,16 @@
   padding: 20px;
   gap: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  align-items: center;
 }
 
 .course-image {
-  width: 2000px;
-  height: 300px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   border-radius: 12px;
+  object-fit: cover;
 }
-
 .course-info {
   font-size: medium;
 }
@@ -199,3 +201,99 @@
     text-align: center;
   }
 }
+.course-top {
+  display: flex;
+  gap: 30px;
+  max-width: 1200px;     
+  margin: 0 auto 40px;  
+  padding: 0 20px;      
+  box-sizing: border-box;
+}
+
+.course-header {
+  flex: 2.3;
+  min-width: 0;
+}
+
+.side-instructor {
+  flex: 1;
+  min-width: 0;
+}
+.course-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding-right: 20px;
+}
+.course-info h2 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #111827;
+  max-width: 90%;
+}
+
+.course-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding-right: 20px;
+}
+
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.start-btn {
+  margin-top: 10px;
+  width: fit-content;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+.update-btn, .delete-btn, .start-btn {
+  background: #6c4cff;        
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;       
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(108, 76, 255, 0.4);
+  min-width: 140px;          
+  text-align: center;
+}
+
+.update-btn:hover {
+  background-color: #5537e6;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(85, 55, 230, 0.6);
+}
+
+.delete-btn {
+  background-color: #e02424;  
+  box-shadow: 0 4px 8px rgba(224, 36, 36, 0.4);
+}
+
+.delete-btn:hover {
+  background-color: #a71d1d;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(167, 29, 29, 0.6);
+}
+
+  .start-btn:hover {
+  background-color: #5537e6;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(85, 55, 230, 0.6);
+}
+

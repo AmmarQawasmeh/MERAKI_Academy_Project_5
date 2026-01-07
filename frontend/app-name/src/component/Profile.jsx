@@ -8,17 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourses } from "../redux/coursesSlice";
 import { jwtDecode } from "jwt-decode";
-
-
 const Profile = () => {
-  const [user, setuser] = useState({});
   const decodedToken = jwtDecode(localStorage.getItem("token"));
   localStorage.setItem("userId", decodedToken.userId);
   const id = localStorage.getItem("userId");
-  console.log(id);
-
-  const getUserById = (id) => {
-    if (!id) return;
+  const getUserById = () => {
+    const id = localStorage.getItem("token.");
     axios
       .get(`http://localhost:5000/users/${id}`, {
         headers: {
@@ -26,39 +21,25 @@ const Profile = () => {
         },
       })
       .then((result) => {
-        console.log(result);
-
-        setuser(result.data.user);
+        dispatch(setCourses(result.rows));
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  useEffect(() => {
-    getUserById(id);
-  }, [id]);
-  
-  let role = "";
-  if (user.role === 1) {
-    role = "admin";
-  } else if (user.role === 2) {
-    role = "student";
-  } else {
-    role = "teacher";
-  }
   return (
     <div className="profile-card">
       <div className="profile-image">
-        <img src={user.image} alt="Student" />
+        <img src="https://via.placeholder.com/300x380" alt="Student" />
       </div>
 
       <div className="profile-content">
-        <h2>
-          Name: {user.firstname} {user.lastname}
-        </h2>
-        <p>Email:{user.email}</p>
-        <p>Age:{user.age}</p>
-        <p>{role}</p>
+        <h2>Smarter tools for modern education</h2>
+        <p>
+          Empower your learning journey with flexible courses, expert
+          instructors, and innovative tools designed for your success.
+        </p>
+
         <div className="profile-stats">
           <div>
             <h3>1500+</h3>

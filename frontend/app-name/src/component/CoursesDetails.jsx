@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import Profile from "./Profile";
 
 import { selectRole, selectIsAdmin, selectIsTeacher } from "../redux/selectors";
 
@@ -111,55 +112,54 @@ const CourseDetails = () => {
 
   return (
     <div className="course-page">
-      <div className="coursedetails-card">
-        <img src={course.image} alt="course" className="course-image" />
+      <div className="course-top">
+        <div className="coursedetails-card course-header">
+          <img src={course.image} alt="course" className="course-image" />
 
-        <div className="course-info">
-          <h2>{course.title}</h2>
-          <p>{course.description}</p>
+          <div className="course-info">
+            <h2>{course.title}</h2>
+            <p>{course.description}</p>
 
-          <div className="course-meta">
-            <span>⏱ {diffDays} days</span>
-            <span>⭐ {course.rate}</span>
-            <span>$ {course.price}</span>
+            <div className="course-meta">
+              <span>⏱ {diffDays} days</span>
+              <span>⭐ {course.rate}</span>
+              <span>$ {course.price}</span>
+            </div>
+
+            <button className="start-btn">Start Course</button>
           </div>
 
-          <button className="start-btn">Start Course</button>
+          {isAdmin && (
+            <div>
+              <button
+                className="update-btn"
+                onClick={() => navigate("/UpdateCourses")}
+              >
+                Update
+              </button>
+
+              <button className="delete-btn" onClick={deleteCourseById}>
+                Delete
+              </button>
+            </div>
+          )}
         </div>
 
-        {isAdmin && (
-          <div>
-            <button
-              className="update-btn"
-              onClick={() => navigate("/UpdateCourses")}
-            >
-              Update Course
-            </button>
+        {user && (
+          <div className="instructor-bar side-instructor">
+            <img src={user.image} alt="Instructor" className="instructor-img" />
 
-            <button className="delete-btn" onClick={deleteCourseById}>
-              Delete Course
-            </button>
+            <div className="instructor-info">
+              <h3>
+                {user.firstName} {user.lastName}
+              </h3>
+              <p>Course Instructor</p>
+            </div>
           </div>
         )}
       </div>
 
       <div className="course-content">
-         {user && (
-  <div className="instructor-bar">
-    <img
-      src={user.image}
-      alt="Instructor"
-      className="instructor-img"
-    />
-
-    <div className="instructor-info">
-      <h3>
-        {user.firstName} {user.lastName}
-      </h3>
-      <p>Course Instructor</p>
-    </div>
-  </div>
-)}
         <div className="lessons">
           <h3>Course Outline</h3>
 
@@ -167,8 +167,6 @@ const CourseDetails = () => {
             <Lesson />
           </div>
         </div>
-
-        
       </div>
     </div>
   );
