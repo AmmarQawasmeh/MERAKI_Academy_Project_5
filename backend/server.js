@@ -18,11 +18,14 @@ const rolesRouter = require("./routers/role");
 const usersRouter = require("./routers/users");
 const courseRouter = require("./routers/courrses");
 const lessonsRouter = require("./Routers/lessons");
+const favouritesRouter = require("./Routers/favourite");
 
 app.use("/lessons", lessonsRouter);
 app.use("/users", usersRouter);
 app.use("/roles", rolesRouter);
 app.use("/courses", courseRouter);
+app.use("/favourite", favouritesRouter)
+
 
 // ================= SOCKET.IO =================
 
