@@ -22,6 +22,7 @@ import Dashboard from "./component/Dashboard";
 import Student from "./component/Studant";
 import ChatPage from "./Chatpage";
 import Content from "./component/Content";
+import IsCompleted from "./component/IsCompleted";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<Page404 />} />
         <Route path="/content" element={<Content/>} />
+        <Route path="/completed" element={<IsCompleted/>} />
         <Route path="/favourite" element={<Favourite />} />{" "}
         <Route path="/search" element={<Search />} />
         <Route path="/updatecourses" element={<UpdateCourses />} />
