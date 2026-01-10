@@ -19,6 +19,7 @@ const CourseDetails = () => {
   const [course, setCourse] = useState(null);
   const [user, setUser] = useState(null);
   const [lessons, setLessons] = useState([]);
+  const [allCompleted, setAllCompleted] = useState(false); // حالة اكتمال كل الدروس
 
   const getCourseById = async () => {
     try {
@@ -94,6 +95,14 @@ const CourseDetails = () => {
     if (course) {
       getUserById(course.instructorid);
       getLessonsByCourseId(course.id);
+
+      // تحقق من اكتمال الكورس
+      axios
+        .get(`http://localhost:5000/lessons/isCompleted/${course.id}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        })
+        .then((res) => setAllCompleted(res.data.allCompleted))
+        .catch((err) => console.error(err));
     }
   }, [course]);
 
@@ -103,10 +112,6 @@ const CourseDetails = () => {
     const end = new Date(course.endcourse);
     diffDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
   }
-
-  console.log("ROLE:", role);
-  console.log("IS ADMIN:", isAdmin);
-  console.log("IS TEACHER:", isTeacher);
 
   if (!course) return <p>Loading course...</p>;
 
@@ -160,11 +165,10 @@ const CourseDetails = () => {
                 onClick={() => navigate(`/profile/${user.id}`)}
               >
                 Profile
-              </button></div>  
+              </button>
+            </div>  
           </div>
-        
         )}
-        
       </div>
 
       <div className="course-content">
@@ -174,6 +178,16 @@ const CourseDetails = () => {
           <div className="lesson-list">
             <Lesson />
           </div>
+
+          {/* زر يظهر فقط إذا كل الدروس مكتملة */}
+          {allCompleted && (
+            <button
+              className="completed-btn"
+              onClick={() => navigate("/completed")}
+            >
+              Go to Completed Page
+            </button>
+          )}
         </div>
       </div>
     </div>
