@@ -7,6 +7,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import axios from "axios";
 
 const Register = () => {
+
   const navigate = useNavigate();
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
@@ -15,7 +16,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [image, setImage] = useState("");
   const [message, setMessage] = useState("");
-
+  const [role, setrole] = useState("")
+  const [description, setdescription] = useState("")
   const handleRegister = () => {
     axios
       .post("http://localhost:5000/users/register", {
@@ -24,6 +26,8 @@ const Register = () => {
         age,
         email,
         password,
+        description,
+        role,
         image,
       })
       .then((res) => {
@@ -92,7 +96,27 @@ const Register = () => {
                     onChange={(e) => setImage(e.target.value)}
                   />
                 </label>
+                
               </div>
+              <select
+          className="input"
+          onChange={(e) => {
+            setrole(e.target.value);
+          }}
+          id="roles"
+        >
+          <option value="">--Please choose an option--</option>
+          <option value="3">Teacher</option>
+          <option value="2">Student</option>
+        </select>
+        <label>Description</label>
+              <input
+                type="text"
+                placeholder="Description"
+                onChange={(e) => {
+                  setdescription(e.target.value);
+                }}
+              />
             </form>
             <button type="submit" onClick={handleRegister}>
               Register

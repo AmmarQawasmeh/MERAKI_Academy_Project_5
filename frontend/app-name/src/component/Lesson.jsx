@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lesson.css";
 import { useSelector } from "react-redux";
+import MagicBento from "./MagicBento/MagicBento";
 
 
 const Lesson = () => {
@@ -21,32 +22,54 @@ const Lesson = () => {
       .catch((err) => console.log(err));
   }, [courseId]);
   return (
+  
+     <MagicBento
+  enableSpotlight
+  enableBorderGlow
+  enableTilt
+  enableMagnetism
+  clickEffect
+  spotlightRadius={300}
+  particleCount={10}
+  glowColor="132, 0, 255"
+>
+  {lessons.length === 0 ? (
+    <p style={{ color: "#fff" }}>No lessons available</p>
+  ) : (
+    lessons.map((lesson, index) => (
+      <div
+        key={lesson.id || index}
+        className="lesson-card magic-bento-card magic-bento-card--border-glow"
+      >
+        {/* Image */}
+        <div className="lesson-image">
+          <img
+            src={lesson.image}
+            alt={lesson.title}
+          />
+        </div>
+
+        {/* Content */}
+        <div className="lesson-content">
+          <h3>{lesson.title}</h3>
+
+          <p className="lesson-duration">
+            ⏱ Duration: {lesson.duration}
+          </p>
+
+          <button
+            className="watch-btn"
+            onClick={() => window.open(lesson.video, "_blank")}
+          >
+            ▶ Watch Video
+          </button>
+        </div>
+      </div>
+    ))
+  )}
+</MagicBento>
+
     
-     <div className="lessons-wrapper">
-      {lessons.length === 0 ? (
-        <p>No lessons available</p>
-      ) : (
-        lessons.map((lesson, index) => (
-          <div className="lesson-card" key={lesson.id || index}>
-            <div className="lesson-image">
-              <img src={lesson.image} alt={lesson.title} />
-            </div>
-
-            <div className="lesson-content">
-              <h3>{lesson.title}</h3>
-              <p>⏱ Duration: {lesson.duration}</p>
-
-              <button
-                className="watch-btn"
-                onClick={() => window.open(lesson.video, "_blank")}
-              >
-                ▶ Watch Video
-              </button>
-            </div>
-          </div>
-        ))
-      )}
-    </div>
   );
 };
 

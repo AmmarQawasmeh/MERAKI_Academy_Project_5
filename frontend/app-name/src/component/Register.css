@@ -64,7 +64,13 @@ body {
   outline: none;
   transition: 0.3s;
 }
-
+.register-card select{
+   padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: 0.3s;
+}
 .register-card input:focus {
   border-color: #6d5dfc;
   box-shadow: 0 0 0 2px rgba(109, 93, 252, 0.15);

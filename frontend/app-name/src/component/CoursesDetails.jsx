@@ -113,8 +113,10 @@ const CourseDetails = () => {
   return (
     <div className="course-page">
       <div className="course-top">
-        <div className="coursedetails-card course-header">
-          <img src={course.image} alt="course" className="course-image" />
+        <div className="course-main">
+          <div className="course-media">
+            <img src={course.image} alt="course" />
+          </div>
 
           <div className="course-info">
             <h2>{course.title}</h2>
@@ -125,38 +127,44 @@ const CourseDetails = () => {
               <span>⭐ {course.rate}</span>
               <span>$ {course.price}</span>
             </div>
-
+            
             <button className="start-btn">Start Course</button>
+
+            {isAdmin && (
+              <div className="admin-actions">
+                <button
+                  className="update-btn"
+                  onClick={() => navigate("/UpdateCourses")}
+                >
+                  Update
+                </button>
+
+                <button className="delete-btn" onClick={deleteCourseById}>
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
-
-          {isAdmin && (
-            <div>
-              <button
-                className="update-btn"
-                onClick={() => navigate("/UpdateCourses")}
-              >
-                Update
-              </button>
-
-              <button className="delete-btn" onClick={deleteCourseById}>
-                Delete
-              </button>
-            </div>
-          )}
         </div>
 
         {user && (
-          <div className="instructor-bar side-instructor">
-            <img src={user.image} alt="Instructor" className="instructor-img" />
-
-            <div className="instructor-info">
-              <h3>
-                {user.firstName} {user.lastName}
-              </h3>
-              <p>Course Instructor</p>
-            </div>
+          <div className="instructor-card">
+            <img src={user.image} alt="Instructor" />
+            <h4>
+              {user.firstName} {user.lastName}
+            </h4>
+            <span>Course Instructor</span>
+            <div>
+               <button
+                className="update-btn profile-btn"
+                onClick={() => navigate(`/profile/${user.id}`)}
+              >
+                Profile
+              </button></div>  
           </div>
+        
         )}
+        
       </div>
 
       <div className="course-content">

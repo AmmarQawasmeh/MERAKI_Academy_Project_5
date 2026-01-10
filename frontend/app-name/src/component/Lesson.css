@@ -1,4 +1,3 @@
-/* Wrapper */
 .lessons-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -20,7 +19,6 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  /* ⭐ أهم تعديل */
   display: flex;
   flex-direction: column;
 }
@@ -30,7 +28,6 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
 }
 
-/* Image */
 .lesson-image img {
   width: 100%;
   height: 200px;
@@ -43,11 +40,9 @@
   transform: scale(1.08);
 }
 
-/* Content */
 .lesson-content {
   padding: 20px;
 
-  /* ⭐ تثبيت المحتوى */
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -66,9 +61,8 @@
   margin-bottom: 20px;
 }
 
-/* Button */
 .watch-btn {
-  margin-top: auto; /* ⭐ يثبت الزر بالأسفل */
+  margin-top: auto; 
   background: linear-gradient(135deg, #7c3aed, #9333ea);
   color: #fff;
   border: none;
@@ -85,13 +79,11 @@
   transform: scale(1.05);
 }
 
-/* Empty State */
 .lessons-wrapper > p {
   color: #fff;
   font-size: 18px;
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   .lessons-wrapper {
     padding: 20px;
@@ -114,4 +106,90 @@
 }
 .lesson-card {
   overflow: hidden;
+}
+.lesson-card {
+  aspect-ratio: auto;
+  min-height: 260px;
+  max-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.lessons-wrapper .card-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  justify-items: center;
+}
+
+.lesson-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.lesson-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.watch-btn {
+  margin-top: auto;
+}
+.lessons-wrapper .card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.lessons-wrapper .magic-bento-card {
+  grid-column: auto !important;
+  grid-row: auto !important;
+}
+.lesson-card {
+  aspect-ratio: auto;
+  min-height: 320px;
+  max-width: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: #f3f5ff;
+  border-radius: 20px;
+}
+.lesson-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.lesson-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 0.5rem;
+}
+
+.watch-btn {
+  margin-top: auto;
+  align-self: center;
+}
+.lesson-card:hover {
+  transform: translateY(-6px);
+}
+.lesson-image {
+  width: 100%;
+  height: 180px;          
+  overflow: hidden;
+  border-radius: 14px;
+}
+.lesson-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   
+  background: #f2f2f2;   
 }

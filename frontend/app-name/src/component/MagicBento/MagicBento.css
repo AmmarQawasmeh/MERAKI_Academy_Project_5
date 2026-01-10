@@ -215,3 +215,20 @@
   position: relative;
   user-select: none;
 }
+.course-card {
+  aspect-ratio: auto;       /* يلغي التقييد */
+  min-height: 280px;        /* كافي لعرض السعر والفيڤوريت */
+  padding-bottom: 1.5em;
+  display: flex;
+  flex-direction: column;
+}
+.course-card .bottom {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.course-card .price {
+  font-size: 1.1rem;
+  font-weight: 600;
+}

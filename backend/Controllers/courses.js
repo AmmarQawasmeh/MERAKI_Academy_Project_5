@@ -2,11 +2,11 @@ const express = require("express");
 const { pool } = require("../models/db");
 
 const createNewCourse = (req, res) => {
-  const { title, description, image, instructorId, startCourse, endCourse, price, rate } = req.body;
+  const { title, description, image, instructorId, category, startCourse, endCourse, price, rate } = req.body;
   pool
     .query(
-      `INSERT INTO courses (title,description,image,instructorId,startCourse,endCourse, price,rate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
-      [title, description, image, instructorId, startCourse, endCourse, price, rate]
+      `INSERT INTO courses (title,description,image,instructorId,category,startCourse,endCourse, price,rate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+      [title, description, image, instructorId,category, startCourse, endCourse, price, rate]
     )
     .then((result) => {
       res.status(201).json({
@@ -88,10 +88,10 @@ const deleteCoursesById = (req, res) => {
 };
 const updateCourseById = (req, res) => {
   const { id } = req.params;
-  const { title, description, image, instructorId, startCourse, endCourse, price, rate } = req.body;
+  const { title, description, image, instructorId,category, startCourse, endCourse, price, rate } = req.body;
   pool.query(
-    `UPDATE courses SET title = COALESCE($1,title) , description = COALESCE($2,description) , image = COALESCE($3,image) , instructorId = COALESCE($4,instructorId) , startCourse =COALESCE($5,startCourse) , endCourse =COALESCE($6,endCourse) ,price=COALESCE($7,price), rate=COALESCE($8,rate) WHERE id = $9 `,
-    [title, description, image, instructorId, startCourse, endCourse, price, rate, id]
+    `UPDATE courses SET title = COALESCE($1,title) , description = COALESCE($2,description) , image = COALESCE($3,image) , instructorId = COALESCE($4,instructorId) ,category=COALESCE($5,category), startCourse =COALESCE($6,startCourse) , endCourse =COALESCE($7,endCourse) ,price=COALESCE($8,price), rate=COALESCE($9,rate) WHERE id = $10 `,
+    [title, description, image, instructorId,category, startCourse, endCourse, price, rate, id]
   )
   .then((result) => {
       res.status(200).json({

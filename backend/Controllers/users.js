@@ -2,12 +2,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { pool } = require("../models/db");
 const register = async (req, res) => {
-  const { firstName, lastName, role, age, email, password, image } = req.body;
+  const { firstName, lastName, role, age, email, password,description, image } = req.body;
   const hashpassowrd = await bcrypt.hash(password, 10);
   pool
     .query(
-      `INSERT INTO users (firstName,lastName,role,age,email,password,image) VALUES ($1,$2,$3,$4,$5,$6,$7)`,
-      [firstName, lastName, role, age, email, hashpassowrd, image]
+      `INSERT INTO users (firstName,lastName,role,age,email,password,description,image) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+      [firstName, lastName, role, age, email, hashpassowrd,description, image]
     )
     .then((result) => {
       console.log(result);
@@ -96,12 +96,12 @@ const getAllUsers = (req, res) => {
 };
 const updateUserById = async (req, res) => {
   const { userId } = req.parms;
-  const { firstName, lastName, age, password, image } = req.body;
+  const { firstName, lastName, age, password,description, image } = req.body;
   const hashpassowrd = await bcrypt.hash(password, 10);
   pool
     .query(
-      `UPDATE users SET firstName = COALESCE($1,firstName) , lastName = COALESCE($2,lastName) , age = COALESCE($3,age) , password = COALESCE($4,password) , image =COALESCE($5,image) WHERE userId = $6 `,
-      [firstName, lastName, age, hashpassowrd, image, userId]
+      `UPDATE users SET firstName = COALESCE($1,firstName) , lastName = COALESCE($2,lastName) , age = COALESCE($3,age) , password = COALESCE($4,password) ,description = COALESCE($5,description) ,image =COALESCE($6,image) WHERE userId = $7 `,
+      [firstName, lastName, age, hashpassowrd,description, image, userId]
     )
     .then((result) => {
       res.status(201).json({

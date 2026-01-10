@@ -30,10 +30,11 @@ const Navbar = () => {
   return (
     <div className="all">
       <div className="bb">
-        <a href="/" className="logo">
+        <div className="logo-title">
+           <a href="/" className="logo">
           <img src="/images/p1.png" alt="logo" />
         </a>
-        <GradientText
+        <GradientText 
           colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
           animationSpeed={3}
           showBorder={false}
@@ -41,6 +42,8 @@ const Navbar = () => {
         >
          Teaching squad
         </GradientText>
+        </div>
+       
 
         <ul className="nav-links">
           <li onClick={() => navigate("/")}>

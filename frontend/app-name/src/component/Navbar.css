@@ -161,3 +161,6 @@ body {
 .dropdown-link-btn:hover {
   background: rgba(106, 13, 173, 1);
 }
+.logo-title{
+  display: flex;
+}
