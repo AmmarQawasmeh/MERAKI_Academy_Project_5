@@ -99,7 +99,7 @@ const CourseDetails = () => {
   }, [courseId]);
 
   useEffect(() => {
-    if (course) {
+    if (course && userid) {
       getUserById(course.instructorid);
       getLessonsByCourseId(course.id);
 
@@ -110,7 +110,7 @@ const CourseDetails = () => {
         .then((res) => setAllCompleted(res.data.allCompleted))
         .catch((err) => console.error(err));
     }
-  }, [course]);
+  }, [course, userid]);
 
   let diffDays = 0;
   if (course?.startcourse && course?.endcourse) {
@@ -184,7 +184,7 @@ const CourseDetails = () => {
                   Update
                 </button>
 
-                <button className="delete-btn" onClick={deleteCourseById()}>
+             <button className="delete-btn" onClick={deleteCourseById}>
                   Delete
                 </button>
               </div>
@@ -220,6 +220,8 @@ const CourseDetails = () => {
                 Profile
               </button>
             </div>
+                        </div>
+
         )}
       </div>
 
@@ -231,7 +233,7 @@ const CourseDetails = () => {
             <Lesson />
           </div>
 
-          {allCompleted && (
+          
           {allCompleted && isStudent && (
             <button
               className="completed-btn"
