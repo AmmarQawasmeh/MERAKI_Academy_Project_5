@@ -207,7 +207,6 @@ console.log(courseId);
               </button>
             </div>  
             </div>
-          </div>
         )}
       </div>
 

@@ -218,7 +218,34 @@ const getCertificate = (req, res) => {
     });
 };
 
+const getNumberOflessons = (req,res)=>{
+    pool.query(`SELECT
+  c.id,
+  c.title,
+  COUNT(l.id) AS totallessons
+FROM courses c
+LEFT JOIN lessons l ON l.course = c.id
+GROUP BY c.id, c.title
+ORDER BY c.id;
+`).then((result) => {
+            res.status(200).json({
+                success: true,
+                message: `get all lessons`,
+                lessons: result.rows,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+                success: false,
+                message: "Server error",
+                err: err.message,
+            });
+        });
+}
 
 module.exports = {
-    createlessons, getAlllessons, getlessonsById, deletelessonsById, updatelessonsById,getlessonsByCourseId,isCourseCompleted,getCertificate
+    createlessons, getAlllessons, getlessonsById, deletelessonsById, 
+    updatelessonsById,getlessonsByCourseId,isCourseCompleted,getCertificate,
+    getNumberOflessons
 }
