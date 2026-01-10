@@ -12,13 +12,26 @@ import { useParams } from 'react-router-dom';
 
 const InstructorCourses = () => {     
     const { id } = useParams();
-    const { role1 } = useParams();
-    console.log(role1);
-    
+    const { role1 } = useParams();    
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const favouriteCourses = useSelector((state) => state.favourite.items);
     const [instructorCourses , setInstructorCourses] = useState([]);
+    const [students , setStudents] = useState([])
+  
+    const getAllStudents =()=>{
+       axios
+      .get(`http://localhost:5000/courses/getStudents`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        setStudents(result.data.students)
+      })
+      .catch((err) => console.log(err));
+    }
+
   useEffect(() => {
     if(role1==="Admin"){
          axios
@@ -32,7 +45,7 @@ const InstructorCourses = () => {
       })
       .catch((err) => console.log(err));
     }else if (role1==="Student"){
-           axios
+      axios
       .get(`http://localhost:5000/courses/getCoursesByStudentId/student/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -46,8 +59,9 @@ const InstructorCourses = () => {
    
   }, []);
 
-  console.log(instructorCourses);
-  
+  useEffect(()=>{
+     getAllStudents()
+  },[])
   const handleToggleFavourite = (course) => {
     const exists = favouriteCourses.find((c) => c.id === course.id);
 
@@ -69,7 +83,6 @@ const InstructorCourses = () => {
         .catch((err) => console.log(err));
     }
   };
-
   return (
     <div>
       <Navbar />
@@ -87,6 +100,9 @@ const InstructorCourses = () => {
 
         <div className="courses-grid">
           {instructorCourses.map((course) => {
+            const numStudents = students.find(s => s.title === course.title) 
+            console.log(numStudents);
+            
             const isFavourite = favouriteCourses.some((c) => c.id === course.id);
             return (
               <div className="course-card" key={course.id}>
@@ -102,7 +118,7 @@ const InstructorCourses = () => {
                 <h3>{course.title}</h3>
 
                 <p>
-                  {course.lessons} Lessons • {course.students} Students
+                  Lessons • {numStudents.totalstudents} Students
                 </p>
 
                 <div className="bottom">

@@ -2,11 +2,31 @@ const express = require("express");
 const { pool } = require("../models/db");
 
 const createNewCourse = (req, res) => {
-  const { title, description, image, instructorId, category, startCourse, endCourse, price, rate } = req.body;
+  const {
+    title,
+    description,
+    image,
+    instructorId,
+    category,
+    startCourse,
+    endCourse,
+    price,
+    rate,
+  } = req.body;
   pool
     .query(
       `INSERT INTO courses (title,description,image,instructorId,category,startCourse,endCourse, price,rate) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
-      [title, description, image, instructorId,category, startCourse, endCourse, price, rate]
+      [
+        title,
+        description,
+        image,
+        instructorId,
+        category,
+        startCourse,
+        endCourse,
+        price,
+        rate,
+      ]
     )
     .then((result) => {
       res.status(201).json({
@@ -26,7 +46,7 @@ const createNewCourse = (req, res) => {
 
 const getAllcourses = (req, res) => {
   console.log("hi");
-  
+
   pool
     .query(`SELECT * FROM courses `)
     .then((result) => {
@@ -57,7 +77,6 @@ const getCourseById = (req, res) => {
       });
     })
     .catch((err) => {
-      
       res.status(500).json({
         success: false,
         message: "Server error",
@@ -88,12 +107,34 @@ const deleteCoursesById = (req, res) => {
 };
 const updateCourseById = (req, res) => {
   const { id } = req.params;
-  const { title, description, image, instructorId,category, startCourse, endCourse, price, rate } = req.body;
-  pool.query(
-    `UPDATE courses SET title = COALESCE($1,title) , description = COALESCE($2,description) , image = COALESCE($3,image) , instructorId = COALESCE($4,instructorId) ,category=COALESCE($5,category), startCourse =COALESCE($6,startCourse) , endCourse =COALESCE($7,endCourse) ,price=COALESCE($8,price), rate=COALESCE($9,rate) WHERE id = $10 `,
-    [title, description, image, instructorId,category, startCourse, endCourse, price, rate, id]
-  )
-  .then((result) => {
+  const {
+    title,
+    description,
+    image,
+    instructorId,
+    category,
+    startCourse,
+    endCourse,
+    price,
+    rate,
+  } = req.body;
+  pool
+    .query(
+      `UPDATE courses SET title = COALESCE($1,title) , description = COALESCE($2,description) , image = COALESCE($3,image) , instructorId = COALESCE($4,instructorId) ,category=COALESCE($5,category), startCourse =COALESCE($6,startCourse) , endCourse =COALESCE($7,endCourse) ,price=COALESCE($8,price), rate=COALESCE($9,rate) WHERE id = $10 `,
+      [
+        title,
+        description,
+        image,
+        instructorId,
+        category,
+        startCourse,
+        endCourse,
+        price,
+        rate,
+        id,
+      ]
+    )
+    .then((result) => {
       res.status(200).json({
         success: true,
         message: `Update courses By Id: ${id} successfully`,
@@ -120,7 +161,6 @@ const getCoursesByInstructorId = (req, res) => {
       });
     })
     .catch((err) => {
-      
       res.status(500).json({
         success: false,
         message: "Server error",
@@ -130,10 +170,25 @@ const getCoursesByInstructorId = (req, res) => {
 };
 const getCoursesBystudentId = (req, res) => {
   console.log("hi");
-  
+
   id = req.params.id;
   pool
-    .query(`SELECT * FROM students_courses WHERE student =$1`, [id])
+    .query(
+      `SELECT
+  u.id AS student_id,
+  u.firstName,
+  u.lastName,
+  c.id AS course_id,
+  c.title,
+  c.category,
+  c.price,
+  c.image
+FROM students_courses sc
+JOIN users u ON sc.student = u.id
+JOIN courses c ON sc.course = c.id
+WHERE u.id = $1 `,
+      [id]
+    )
     .then((result) => {
       res.status(200).json({
         success: true,
@@ -141,7 +196,6 @@ const getCoursesBystudentId = (req, res) => {
       });
     })
     .catch((err) => {
-      
       res.status(500).json({
         success: false,
         message: "Server error",
@@ -149,6 +203,33 @@ const getCoursesBystudentId = (req, res) => {
       });
     });
 };
+const getStudents = (req, res) => {
+  console.log("hi");
+  pool
+    .query(
+      `SELECT
+  c.id,
+  c.title,
+  COUNT(sc.student) AS totalstudents
+FROM courses c
+LEFT JOIN students_courses sc ON c.id = sc.course
+GROUP BY c.id; `
+    )
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        students: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
+};
+
 module.exports = {
   createNewCourse,
   getAllcourses,
@@ -156,5 +237,6 @@ module.exports = {
   deleteCoursesById,
   updateCourseById,
   getCoursesByInstructorId,
-  getCoursesBystudentId
+  getCoursesBystudentId,
+  getStudents,
 };
