@@ -7,6 +7,8 @@ const {
   updateCourseById,
   getCoursesByInstructorId,
   getCoursesBystudentId,
+  addCourseToStudent,
+  
 } = require("../Controllers/courses");
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
@@ -18,7 +20,7 @@ courseRouter.get("/getAllcourses", getAllcourses);
 courseRouter.get("/getCourseById/:id", getCourseById);
 courseRouter.get("/getCoursesByInstructorId/:id",   getCoursesByInstructorId);
 courseRouter.get("/getCoursesByStudentId/student/:id",   getCoursesBystudentId);
-
+courseRouter.post("/addCourseToStudent", addCourseToStudent);
 
 courseRouter.delete(
   "/deleteCoursesById/:id",

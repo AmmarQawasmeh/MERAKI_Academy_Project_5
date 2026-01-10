@@ -12,10 +12,14 @@ import { IoIosHome } from "react-icons/io";
 import { GrLogout } from "react-icons/gr";
 import { TbLogin } from "react-icons/tb";
 import GradientText from "./GradientText/GradientText";
-
+import { selectRole, selectIsAdmin, selectIsTeacher, selectIsStudent } from "../redux/selectors";
 import "./GradientText/GradientText.css";
 
 const Navbar = () => {
+    const role = useSelector(selectRole);
+  const isAdmin = useSelector(selectIsAdmin);
+  const isTeacher = useSelector(selectIsTeacher);
+  const isStudent = useSelector(selectIsStudent)
    const id = localStorage.getItem("userId")
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -87,7 +91,8 @@ const Navbar = () => {
                 Menu
               </button>
 
-              {open && (
+              {open && (isAdmin || isTeacher) &&(
+                
                 <div className="dropdown-content">
                   <button
                     className="dropdown-link-btn"
@@ -99,6 +104,18 @@ const Navbar = () => {
                     Admin Dashboard
                   </button>
 
+                  <button
+                    className="dropdown-link-btn logout"
+                    onClick={handleLogout}
+                  >
+                    Logout <GrLogout />
+                  </button>
+                </div>
+              )}
+              {open && isStudent && (
+                 
+                <div className="dropdown-content">
+            
                   <button
                     className="dropdown-link-btn logout"
                     onClick={handleLogout}
