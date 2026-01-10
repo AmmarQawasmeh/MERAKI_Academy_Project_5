@@ -256,7 +256,7 @@ module.exports = {
   updateCourseById,
   getCoursesByInstructorId,
   getCoursesBystudentId,
-  addCourseToStudent
+  addCourseToStudent,
   getStudents,
  
 };

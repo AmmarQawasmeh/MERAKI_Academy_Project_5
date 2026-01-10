@@ -103,9 +103,8 @@ const CourseDetails = () => {
       getUserById(course.instructorid);
       getLessonsByCourseId(course.id);
 
-      // تحقق من اكتمال الكورس
       axios
-        .get(`http://localhost:5000/lessons/isCompleted/${course.id}`, {
+        .get(`http://localhost:5000/lessons/isCompleted/${course.id}/${userid}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then((res) => setAllCompleted(res.data.allCompleted))
@@ -122,7 +121,7 @@ const CourseDetails = () => {
 
   const addCourseToStudent = () => {
     const student = userid;
-    const course = courseId
+    const course = courseId;
     axios
       .post(
         `http://localhost:5000/courses/addCourseToStudent`,
@@ -133,19 +132,28 @@ const CourseDetails = () => {
           },
         }
       )
-      .then((res) => {
-        
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log(err);
       });
   };
- 
+  const addLessonsToCourse = () => {
+    const coursesid = courseId
+    axios.post(
+      "http://localhost:5000/lessons/addLessonsToCourse",
+      { userid, coursesid },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    ).then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   if (!course) return <p>Loading course...</p>;
-console.log(userid);
-console.log(courseId);
-
 
   return (
     <div className="course-page">
@@ -165,7 +173,7 @@ console.log(courseId);
               <span>$ {course.price}</span>
             </div>
 
-            <button className="start-btn">Start Course</button>
+            {isStudent && <button className="start-btn">Start Course</button>}
 
             {(isAdmin || isTeacher) && (
               <div className="admin-actions">
@@ -176,14 +184,20 @@ console.log(courseId);
                   Update
                 </button>
 
-                <button className="delete-btn" onClick={deleteCourseById}>
+                <button className="delete-btn" onClick={deleteCourseById()}>
                   Delete
                 </button>
               </div>
             )}
             {isStudent && (
               <div className="admin-actions">
-                <button className="update-btn" onClick={()=>{addCourseToStudent()}}>
+                <button
+                  className="update-btn"
+                  onClick={() => {
+                    addCourseToStudent();
+                    addLessonsToCourse()
+                  }}
+                >
                   Add Course
                 </button>
               </div>
@@ -205,7 +219,6 @@ console.log(courseId);
               >
                 Profile
               </button>
-            </div>  
             </div>
           </div>
         )}
@@ -219,8 +232,7 @@ console.log(courseId);
             <Lesson />
           </div>
 
-          {/* زر يظهر فقط إذا كل الدروس مكتملة */}
-          {allCompleted && (
+          {allCompleted && isStudent && (
             <button
               className="completed-btn"
               onClick={() => navigate("/completed")}
