@@ -28,6 +28,7 @@ const CourseDetails = () => {
   const [lessons, setLessons] = useState([]);
   const [allCompleted, setAllCompleted] = useState(false); 
 
+
   console.log(userid);
   
   const getCourseById = async () => {

@@ -192,6 +192,7 @@ const isCourseCompleted = (req, res) => {
 const getCertificate = (req, res) => {
   const { courseId, userid } = req.params;
 
+
   /* 
   l.id AS lesson_id,
         l.title AS lesson_title,
@@ -226,6 +227,8 @@ const getCertificate = (req, res) => {
       }
 
       return res.status(200).json({ message: "Course completed, certificate available" });
+     
+
     })
     .catch((err) => {
       console.error(err);
