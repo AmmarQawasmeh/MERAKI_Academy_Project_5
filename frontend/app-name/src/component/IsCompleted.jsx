@@ -3,7 +3,6 @@ import "./IsCompleted.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { FcDisclaimer } from "react-icons/fc";
 
 function IsCompleted() {
   const [message, setMessage] = useState(null);
@@ -36,15 +35,11 @@ function IsCompleted() {
     axios
       .get(
         `http://localhost:5000/lessons/certificate/${courseId}/users/${userid}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((res) => setMessage(res.data.message))
       .catch((err) => console.log(err));
   }, [courseId, userid, token]);
-
-  if (!message) return null;
 
   if (message !== "Course completed certificate available") {
     return (
@@ -57,8 +52,7 @@ function IsCompleted() {
           </div>
 
           <div className="unauth-content">
-            <div className="unauth-emoji"><FcDisclaimer />
-</div>
+            <div className="unauth-emoji">🚫</div>
 
             <h2 className="unauth-title">Course Not Completed</h2>
 
@@ -75,31 +69,24 @@ function IsCompleted() {
   return (
     <div className="certificate-page">
       <div className="certificate-wrapper">
-
-        <img
-          src="/images/p2.png"
-          alt="Certificate Frame"
-          className="certificate-frame"
-        />
+        <img src="/images/p2.png" className="certificate-frame" alt="Certificate" />
 
         <div className="certificate-content">
-
-          
 
           <div className="cert-name">
             {user.firstname} {user.lastname}
           </div>
 
-       
 
-          <div className="cert-course">
-            {course.title}
+          
+
+          <div className="cert-course">{course.title}</div>
+
+          <div className="cert-footer">
+            <div className="cert-date">
+              Date: {new Date().toLocaleDateString()}
+            </div>
           </div>
-
-          <div className="cert-date">
-            {new Date().toLocaleDateString()}
-          </div>
-
         </div>
       </div>
     </div>
