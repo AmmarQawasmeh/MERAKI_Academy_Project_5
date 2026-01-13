@@ -9,7 +9,7 @@ import { setCourseId } from "../redux/courseDetailsSlice";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { addToFavourite, removeFromFavourite } from "../redux/favouriteSlice";
 import MagicBento from "./react bits/MagicBento/MagicBento";
-
+import GradientText from "./react bits/GradientText/GradientText";
 const Courses = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -89,7 +89,14 @@ const Courses = () => {
       <Navbar />
 
       <section className="courses-section">
-        <h2>Popular Courses</h2>
+         <GradientText
+            colors={["#40ffaa", "#a03ba0", "#40ffaa", "#a03ba0", "#40ffaa"]}
+            animationSpeed={3}
+            showBorder={false}
+            className="custom-class"
+          >
+            Popular Courses
+          </GradientText>
 
         <div className="filters">
           <button className="active">All</button>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 import "./Unauthorized.css";
 
 const Unauthorized = () => {
