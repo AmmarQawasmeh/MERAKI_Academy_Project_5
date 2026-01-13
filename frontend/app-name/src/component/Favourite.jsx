@@ -5,6 +5,9 @@ import { addToFavourite, removeFromFavourite, setFavourite } from "../redux/favo
 import "./Favourite.css";
 import { useNavigate } from "react-router-dom";
 
+import { setCourseId } from "../redux/courseDetailsSlice";
+
+
 
 function Favourite() {
   const dispatch = useDispatch();
@@ -53,8 +56,11 @@ function Favourite() {
         ) : (
           favouriteCourses.map((course) => (
             <div className="unauth-card" key={course.id}>
-              <img onClick={(()=>{
-                navigate("/")
+              <img onClick={(() => {
+                dispatch(setCourseId(course.id))
+
+                navigate("/courseDetails")
+
               })} src={course.image} alt={course.title} />
               <h3>{course.title}</h3>
               <div className="unauth-bottom">
