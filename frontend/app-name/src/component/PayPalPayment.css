@@ -1,0 +1,39 @@
+.paypal-container {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
+}
+
+.paypal-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.paypal-price {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+.paypal-box {
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+@media (max-width: 480px) {
+  .paypal-container {
+    margin: 20px;
+    padding: 20px;
+  }
+}

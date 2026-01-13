@@ -25,6 +25,7 @@ const CourseDetails = () => {
   const [user, setUser] = useState(null);
   const [lessons, setLessons] = useState([]);
 
+console.log(courseId);
 
 
   const [allCompleted, setAllCompleted] = useState(false); 

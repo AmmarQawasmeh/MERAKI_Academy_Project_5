@@ -42,7 +42,8 @@ const Search = () => {
            {searchCourses.map(course => (
       <ListGroup.Item  key={course.id}
               onClick={() => {
-                 dispatch(setCourseId(setCourseId(course.id)))
+                console.log(course);
+                 dispatch(setCourseId(course.id))
                 navigate(`/courseDetails`)}}>  {course.title}</ListGroup.Item>
     ))}
     </ListGroup>
