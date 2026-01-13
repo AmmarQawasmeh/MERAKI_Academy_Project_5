@@ -8,7 +8,7 @@ import { setCourses } from "../redux/coursesSlice";
 import { setCourseId } from "../redux/courseDetailsSlice";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { addToFavourite, removeFromFavourite } from "../redux/favouriteSlice";
-import MagicBento from "./MagicBento/MagicBento";
+import MagicBento from "./react bits/MagicBento/MagicBento";
 
 const Courses = () => {
   const navigate = useNavigate();

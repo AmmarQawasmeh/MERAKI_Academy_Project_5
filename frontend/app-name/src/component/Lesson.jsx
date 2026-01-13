@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Lesson.css";
 import { useSelector } from "react-redux";
-import MagicBento from "./MagicBento/MagicBento";
+import MagicBento from "./react bits/MagicBento/MagicBento";
 
 
 const Lesson = () => {

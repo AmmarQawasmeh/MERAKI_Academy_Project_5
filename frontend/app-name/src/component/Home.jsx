@@ -4,15 +4,16 @@ import Navbar from "./navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourses } from "../redux/coursesSlice";
 import axios from "axios";
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { setCourseId } from "../redux/courseDetailsSlice";
 import { useNavigate } from "react-router-dom";
 import { FcLike } from "react-icons/fc";
 import { jwtDecode } from "jwt-decode";
-
+import GradientText from "./react bits/GradientText/GradientText";
+import SplashCursor from "./react bits/SplashCursor/SplashCursor";
 const Home = () => {
-  const decodedToken = localStorage.getItem("token") || ""
-  localStorage.setItem("userId",jwtDecode( decodedToken).userId);
+  const decodedToken = localStorage.getItem("token") || "";
+  localStorage.setItem("userId", jwtDecode(decodedToken).userId);
   const [students, setStudents] = useState([]);
   const [numLessons, setNumLessons] = useState([]);
   const navigate = useNavigate();
@@ -43,12 +44,12 @@ const Home = () => {
       .catch((err) => console.log(err));
   };
   useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    const decoded = jwtDecode(token);
-    localStorage.setItem("userId", decoded.userId);
-  }
-}, []);
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decoded = jwtDecode(token);
+      localStorage.setItem("userId", decoded.userId);
+    }
+  }, []);
 
   const getAllCourses = () => {
     axios
@@ -74,13 +75,22 @@ const Home = () => {
   useEffect(() => {
     getNumLessons();
     getAllStudents();
-     getAllCourses();
+    getAllCourses();
   }, []);
   return (
     <div className="home">
+      {<SplashCursor/>}
       <section className="hero">
         <div className="hero-text">
-          <h1>Smarter tools for modern eductaion</h1>
+          <GradientText
+            colors={["#601b8f", "#a03ba0", "#40ffaa", "#a03ba0", "#b340ff"]}
+            animationSpeed={3}
+            showBorder={false}
+            className="custom-class"
+            
+          >
+            Smarter tools for modern eductaion{" "}
+          </GradientText>
         </div>
         <div className="below_hero">
           <section className="cards">
