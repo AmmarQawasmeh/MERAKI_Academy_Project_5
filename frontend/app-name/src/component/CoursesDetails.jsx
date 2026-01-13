@@ -26,11 +26,11 @@ const CourseDetails = () => {
   const [course, setCourse] = useState(null);
   const [user, setUser] = useState(null);
   const [lessons, setLessons] = useState([]);
-  const [allCompleted, setAllCompleted] = useState(false); 
+  const [allCompleted, setAllCompleted] = useState(false);
 
 
   console.log(userid);
-  
+
   const getCourseById = async () => {
     try {
       const res = await axios.get(
@@ -135,7 +135,7 @@ const CourseDetails = () => {
           },
         }
       )
-      .then((res) => {})
+      .then((res) => { })
       .catch((err) => {
         console.log(err);
       });
@@ -150,7 +150,7 @@ const CourseDetails = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
-    ).then((res) => {})
+    ).then((res) => { })
       .catch((err) => {
         console.log(err);
       });
@@ -187,7 +187,7 @@ const CourseDetails = () => {
                   Update
                 </button>
 
-             <button className="delete-btn" onClick={deleteCourseById}>
+                <button className="delete-btn" onClick={deleteCourseById}>
                   Delete
                 </button>
               </div>
@@ -223,7 +223,7 @@ const CourseDetails = () => {
                 Profile
               </button>
             </div>
-                        </div>
+          </div>
 
         )}
       </div>
@@ -236,14 +236,16 @@ const CourseDetails = () => {
             <Lesson />
           </div>
 
-          
+
           {allCompleted && isStudent && (
-            <button
-              className="completed-btn"
-              onClick={() => navigate(`/completed/${courseId}`)}
-            >
-              Go to Completed Page
-            </button>
+            <div className="completed-btn-wrapper">
+              <button
+                className="completed-btn"
+                onClick={() => navigate(`/completed/${courseId}`)}
+              >
+                Finish Course
+              </button>
+            </div>
           )}
         </div>
       </div>
