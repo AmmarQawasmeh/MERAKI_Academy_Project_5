@@ -120,6 +120,7 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 50px;
 }
 
 .course-cardHome:hover {

@@ -16,6 +16,7 @@ import {
   selectIsStudent,
 } from "../redux/selectors";
 import PillNav from "./react bits/PillNav/PillNav";
+import Profile from "./Profile";
 
 const Navbar = () => {
   const dropdownRef = useRef();
@@ -52,6 +53,26 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [open]);
+  const handleGuestLogin = async () => {
+  try {
+    const res = await axios.post("http://localhost:5000/login", {
+      email: "ahmad@gmail.com",
+      password: "12345",
+    });
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("userId", res.data.user.id);
+    localStorage.setItem("role", res.data.user.role);
+
+  
+
+    navigate("/");
+    setOpen(false);
+  } catch (error) {
+    console.error("Guest login failed", error);
+  }
+};
+
 
   return (
     <div className="all">
@@ -76,7 +97,9 @@ const Navbar = () => {
               { label: "Home", href: "/" },
               { label: "Courses", href: "/courses" },
               { label: "About us", href: "/about" },
-              ...(isLoggedIn ? [{ label: "Favourite", href: "/favourite" }] : []),
+              ...(isLoggedIn
+                ? [{ label: "Favourite", href: "/favourite" }]
+                : []),
               { label: "Chat", href: "/message" },
             ]}
             activeHref={window.location.pathname}
@@ -101,46 +124,46 @@ const Navbar = () => {
                 Menu
               </button>
 
-              {open && (
+              {open && (isAdmin || isTeacher) && (
                 <div className="dropdown-content" ref={dropdownRef}>
-                  {/* Profile للجميع */}
                   <button
-                    className="dropdown-link-btn"
-                    onClick={() => {
-                      navigate(`/profile/${id}`);
-                      setOpen(false);
+                    className="dropdown-link-btn logout"
+                    onClick={()=>{
+                      navigate(`/profile/${id}`)
                     }}
                   >
                     Profile
                   </button>
+                  <button
+                    className="dropdown-link-btn"
+                    onClick={() => {
+                      navigate("/dashboard");
+                      setOpen(false);
+                    }}
+                  >
+                    Admin Dashboard
+                  </button>
 
-                  {/* Admin */}
-                  {isAdmin && (
-                    <button
-                      className="dropdown-link-btn"
-                      onClick={() => {
-                        navigate("/dashboard");
-                        setOpen(false);
-                      }}
-                    >
-                      Admin Dashboard
-                    </button>
-                  )}
+                  <button
+                    className="dropdown-link-btn logout"
+                    onClick={handleLogout}
+                  >
+                    Logout <GrLogout />
+                  </button>
+                  
+                </div>
+              )}
 
-                  {/* Teacher */}
-                  {isTeacher && (
-                    <button
-                      className="dropdown-link-btn"
-                      onClick={() => {
-                        navigate("/teacherDashboard");
-                        setOpen(false);
-                      }}
-                    >
-                      Teacher Dashboard
-                    </button>
-                  )}
-
-                  {/* Logout للجميع */}
+              {open && isStudent && (
+                <div className="dropdown-content" ref={dropdownRef}>
+                  <button
+                    className="dropdown-link-btn logout"
+                    onClick={()=>{
+                      navigate(`/profile/${id}`)
+                    }}
+                  >
+                    Profile
+                  </button>
                   <button
                     className="dropdown-link-btn logout"
                     onClick={handleLogout}
