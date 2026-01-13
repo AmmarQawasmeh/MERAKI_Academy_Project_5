@@ -154,9 +154,7 @@ const Home = () => {
                 </p>
                 <div className="bottom">
                   <span className="price">${course.price}</span>
-                  <button>
-                    <FcLike />
-                  </button>
+                 
                 </div>
               </div>
             );
