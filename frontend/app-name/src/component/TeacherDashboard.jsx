@@ -7,7 +7,7 @@ import "./Courses.css";
 import Navbar from "./navbar";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import MagicBento from "./MagicBento/MagicBento";
+import MagicBento from "./react bits/MagicBento/MagicBento";
 
 const TeacherDashboard = () => {
   const userid = localStorage.getItem("userId") || null;

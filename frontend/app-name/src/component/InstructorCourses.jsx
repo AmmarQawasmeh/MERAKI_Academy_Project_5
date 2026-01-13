@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Courses.css";
+import "./Lesson.css";
 import Navbar from "./navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { setCourseId } from "../redux/courseDetailsSlice";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { addToFavourite, removeFromFavourite } from "../redux/favouriteSlice";
 import { useParams } from "react-router-dom";
-
+import MagicBento from "./react bits/MagicBento/MagicBento";
 const InstructorCourses = () => {
   const { id } = useParams();
   const { role1 } = useParams();
@@ -120,7 +120,16 @@ const InstructorCourses = () => {
           <button>Management</button>
         </div>
 
-        <div className="courses-grid">
+       <MagicBento
+  enableSpotlight
+  enableBorderGlow
+  enableTilt
+  enableMagnetism
+  clickEffect
+  spotlightRadius={300}
+  particleCount={10}
+  glowColor="132, 0, 255"
+>
           {instructorCourses.map((course) => {
             const numStudents =
               students.find((s) => s.title === course.title)?.totalstudents ||
@@ -162,7 +171,7 @@ const InstructorCourses = () => {
               </div>
             );
           })}
-        </div>
+</MagicBento>
 
         <button className="load-more">Load More</button>
       </section>

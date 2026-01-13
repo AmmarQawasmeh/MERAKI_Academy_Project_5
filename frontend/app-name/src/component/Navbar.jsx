@@ -1,85 +1,98 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
-import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Search from "./Search";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/auth";
-import { MdOutlineFavorite } from "react-icons/md";
-import { CgProfile, CgFileDocument } from "react-icons/cg";
-import { FaBook, FaRegIdCard } from "react-icons/fa";
-import { IoIosHome } from "react-icons/io";
 import { GrLogout } from "react-icons/gr";
 import { TbLogin } from "react-icons/tb";
-import GradientText from "./GradientText/GradientText";
-import { selectRole, selectIsAdmin, selectIsTeacher, selectIsStudent } from "../redux/selectors";
-import "./GradientText/GradientText.css";
+import { FaRegIdCard } from "react-icons/fa";
+import GradientText from "./react bits/GradientText/GradientText";
+import { useNavigate } from "react-router-dom";
+import {
+  selectRole,
+  selectIsAdmin,
+  selectIsTeacher,
+  selectIsStudent,
+} from "../redux/selectors";
+import PillNav from "./react bits/PillNav/PillNav";
+import Profile from "./Profile";
 
 const Navbar = () => {
-    const role = useSelector(selectRole);
+  const dropdownRef = useRef();
+  const role = useSelector(selectRole);
   const isAdmin = useSelector(selectIsAdmin);
   const isTeacher = useSelector(selectIsTeacher);
-  const isStudent = useSelector(selectIsStudent)
-   const id = localStorage.getItem("userId")
+  const isStudent = useSelector(selectIsStudent);
+  const id = localStorage.getItem("userId");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [open, setOpen] = useState(false);
+
   const handleLogout = () => {
     localStorage.clear();
     dispatch(logout());
     navigate("/login");
     setOpen(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        open &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
   return (
     <div className="all">
       <div className="bb">
         <div className="logo-title">
-           <a href="/" className="logo">
-          <img src="/images/p1.png" alt="logo" />
-        </a>
-        <GradientText 
-          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-          animationSpeed={3}
-          showBorder={false}
-          className="custom-class"
-        >
-         Teaching squad
-        </GradientText>
+          <a href="/" className="logo">
+            <img src="/images/p1.png" alt="logo" />
+          </a>
+          <GradientText
+            colors={["#40ffaa", "#a03ba0", "#40ffaa", "#a03ba0", "#40ffaa"]}
+            animationSpeed={3}
+            showBorder={false}
+            className="custom-class"
+          >
+            Teaching squad
+          </GradientText>
         </div>
-       
 
-        <ul className="nav-links">
-          <li onClick={() => navigate("/")}>
-            Home <IoIosHome />
-          </li>
-
-          <li onClick={() => navigate("/courses")}>
-            Courses <FaBook />
-          </li>
-
-          <li onClick={() => navigate("/about")}>
-            About us <CgFileDocument />
-          </li>
-
-          {isLoggedIn && (
-            <>
-              <li onClick={() => navigate(`/profile/${id}`)}>
-                Profile <CgProfile />
-              </li>
-
-              <li onClick={() => navigate("/favourite")}>
-                Favourite <MdOutlineFavorite />
-              </li>
-            </>
-          )}
-          <li onClick={() => navigate("/message")}>
-            Chat <CgFileDocument />
-          </li>
-          <li>
-            <Search />
-          </li>
-        </ul>
+        <div className="nav-center">
+          <PillNav
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Courses", href: "/courses" },
+              { label: "About us", href: "/about" },
+              ...(isLoggedIn
+                ? [{ label: "Favourite", href: "/favourite" }]
+                : []),
+              { label: "Chat", href: "/message" },
+            ]}
+            activeHref={window.location.pathname}
+            onNavigate={(href) => navigate(href)}
+            className="custom-nav"
+            ease="power2.easeOut"
+            baseColor="transparent"
+            pillColor="rgba(255,255,255,0.25)"
+            pillTextColor="#5e27b7"
+            hoveredPillTextColor="#ffffff"
+          />
+          <Search />
+        </div>
 
         <div className="auth-buttons">
           {isLoggedIn ? (
@@ -91,6 +104,16 @@ const Navbar = () => {
                 Menu
               </button>
 
+             {open && (isAdmin || isTeacher) && (
+                <div className="dropdown-content" ref={dropdownRef}>
+                  <button
+                    className="dropdown-link-btn logout"
+                    onClick={()=>{
+                      navigate(`/profile/${id}`)
+                    }}
+                  >
+                    Profile
+                  </button>
               {open && isAdmin  &&(
                 <div className="dropdown-content">
                   <button
@@ -111,6 +134,8 @@ const Navbar = () => {
                   </button>
                 </div>
               )}
+
+
                  {open && isTeacher  &&(
                 <div className="dropdown-content">
                   <button
@@ -132,9 +157,15 @@ const Navbar = () => {
                 </div>
               )}
               {open && isStudent && (
-                 
-                <div className="dropdown-content">
-            
+                <div className="dropdown-content" ref={dropdownRef}>
+                  <button
+                    className="dropdown-link-btn logout"
+                    onClick={()=>{
+                      navigate(`/profile/${id}`)
+                    }}
+                  >
+                    Profile
+                  </button>
                   <button
                     className="dropdown-link-btn logout"
                     onClick={handleLogout}
@@ -148,8 +179,7 @@ const Navbar = () => {
             <>
               <Button className="btn-btn" onClick={() => navigate("/login")}>
                 Login <TbLogin />
-              </Button>{"   "}
-
+              </Button>
               <Button
                 className="btn-btn1"
                 onClick={() => navigate("/register")}
