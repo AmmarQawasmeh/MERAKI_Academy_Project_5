@@ -10,13 +10,12 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { addToFavourite, removeFromFavourite } from "../redux/favouriteSlice";
 import { useParams } from "react-router-dom";
 import MagicBento from "./react bits/MagicBento/MagicBento";
-const InstructorCourses = () => {
-  const { id } = useParams();
-  const { role1 } = useParams();
+const SearchCategory = () => {
+  const { category } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const favouriteCourses = useSelector((state) => state.favourite.items);
-  const [instructorCourses, setInstructorCourses] = useState([]);
+  const [categoryCourses, setCategoryCourses] = useState([]);
   const [students, setStudents] = useState([]);
   const [numLessons, setNumLessons] = useState([]);
   const getNumLessons = () => {
@@ -46,32 +45,18 @@ const InstructorCourses = () => {
   };
 
   useEffect(() => {
-    if (role1 === "Teacher") {
+    
       axios
-        .get(`http://localhost:5000/courses/getCoursesByInstructorId/instructor/${id}`, {
+        .get(`http://localhost:5000/courses/getcoursebycategory/category/${category}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
         .then((result) => {
-          setInstructorCourses(result.data.courses);
+          setCategoryCourses(result.data.category);
         })
         .catch((err) => console.log(err));
-    } else if (role1 === "Student") {
-      axios
-        .get(
-          `http://localhost:5000/courses/getCoursesByStudentId/student/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then((result) => {
-          setInstructorCourses(result.data.courses);
-        })
-        .catch((err) => console.log(err));
-    }
+  
   }, []);
   useEffect(() => {
     getNumLessons();
@@ -104,12 +89,14 @@ const InstructorCourses = () => {
         .catch((err) => console.log(err));
     }
   };
+  console.log(categoryCourses);
+  
 
   return (
     <div>
       <Navbar />
       <section className="courses-section">
-        <h2>My Courses</h2>
+        <h2> Courses</h2>
 
 
        <MagicBento
@@ -122,7 +109,7 @@ const InstructorCourses = () => {
   particleCount={10}
   glowColor="132, 0, 255"
 >
-          {instructorCourses.map((course) => {
+          {categoryCourses.map((course) => {
             const numStudents =
               students.find((s) => s.title === course.title)?.totalstudents ||
               0;
@@ -160,4 +147,4 @@ const InstructorCourses = () => {
   );
 };
 
-export default InstructorCourses;
+export default SearchCategory;

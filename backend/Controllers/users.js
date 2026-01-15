@@ -142,11 +142,6 @@ const deleteUserById = (req, res) => {
    pool
     .query(`DELETE FROM courses WHERE instructorid = $1 `, [id])
     .then((result) => {
-      res.status(200).json({
-        success: true,
-        message: `Delete courses By Id: ${id} successfully`,
-        courses: result.rows,
-      });
     })
     .catch((err) => {
       console.log(err);

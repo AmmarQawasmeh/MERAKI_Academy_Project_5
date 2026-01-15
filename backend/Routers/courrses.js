@@ -17,6 +17,7 @@ const {
   getStudentsByInstructorId,
   getDitinctStudentsByInstructorId,
   getCourseStudent,
+  getCourseByCategory,
 } = require("../Controllers/courses");
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
@@ -37,6 +38,8 @@ courseRouter.get("/getCoursesByStudentId/student/:id",   getCoursesBystudentId);
 courseRouter.get("/allInstructors" , getAllcoursesInstructors)
 courseRouter.get("/getStudentsByInstructorId/instructor/students/:instructorId" , getStudentsByInstructorId)
 courseRouter.get("/Course/Student/:course/:student", getCourseStudent);
+courseRouter.get("/getcoursebycategory/category/:category", getCourseByCategory);
+
 courseRouter.post("/addCourseToStudent", addCourseToStudent);
 
 courseRouter.get("/getStudents",   getStudents);
