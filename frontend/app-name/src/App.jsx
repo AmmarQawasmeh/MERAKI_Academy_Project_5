@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Unauthorized from "./component/Unauthorized";
 import Courses from "./component/Courses";
 import CoursesDetails from "./component/CoursesDetails";
-import Navbar from "./component/navbar";
+import Navbar from "./component/Navbar";
 import Profile from "./component/Profile";
 import Footer from "./component/Footer ";
 import Page404 from "./component/Page404";
@@ -36,6 +36,7 @@ import NewCard from "./component/NewCard";
 import CheckoutReview from "./component/CheckoutReview";
 import Nofav from "./component/nofav";
 import Notcompleted from "./component/Notcompleted";
+import SearchCategory from "./component/searchcategory";
 const initialOptions = {
   "client-id": "YOUR_SANDBOX_CLIENT_ID", // sandbox key
   currency: "USD",
@@ -71,6 +72,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/teacherDashboard" element={<TeacherDashboard />} />
           <Route path="/student" element={<Student />} />
+          <Route path="/searchcategory/:category" element={<SearchCategory />} />
           <Route
             path="/StudentsByInstructor/:userid"
             element={<StudentsByInstructor />}

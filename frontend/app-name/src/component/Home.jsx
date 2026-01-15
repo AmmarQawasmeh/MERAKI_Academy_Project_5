@@ -80,6 +80,8 @@ const Home = () => {
     getAllStudents();
     getAllCourses();
   }, []);
+  console.log(numLessons);
+  
   return (
     <div className="home">
       {<SplashCursor/>}
@@ -126,6 +128,7 @@ const Home = () => {
       >
         <div className="courses-gridHome">
           {latestCourses.map((course, index) => {
+            course.title
             const numStudents =
               students.find((s) => s.title === course.title)?.totalstudents ||
               0;
@@ -133,6 +136,7 @@ const Home = () => {
             const numLessons1 =
               numLessons.find((l) => l.title === course.title)?.totalLessons ||
               0;
+              
 
             return (
               <div
@@ -150,7 +154,7 @@ const Home = () => {
                 />
                 <h3>{course.title}</h3>
                 <p>
-                  {numLessons1} Lessons • {numStudents} Students
+                  5 Lessons • {numStudents} Students
                 </p>
                 <div className="bottom">
                   <span className="price">${course.price}</span>

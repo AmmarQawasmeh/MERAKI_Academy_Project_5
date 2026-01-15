@@ -11,6 +11,7 @@ import { addToFavourite, removeFromFavourite } from "../redux/favouriteSlice";
 import MagicBento from "./react bits/MagicBento/MagicBento";
 import GradientText from "./react bits/GradientText/GradientText";
 const Courses = () => {
+  const [category , setCategory] = useState("")
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.courses.courses);
@@ -83,11 +84,10 @@ const Courses = () => {
         .catch((err) => console.log(err));
     }
   };
-  
+
   return (
     <div>
       <Navbar />
-
       <section className="courses-section">
          <GradientText
             colors={["#40ffaa", "#a03ba0", "#40ffaa", "#a03ba0", "#40ffaa"]}
@@ -100,18 +100,25 @@ const Courses = () => {
 
         <div className="filters">
           <button className="active">All</button>
-          <button>Web Development</button>
-          <button>Data Science</button>
-          <button>Digital Marketing</button>
-          <button>Business</button>
-          <button>Management</button>
-          <button>Databases (SQL / NoSQL)</button>
-          <button>Science</button>
-          <button>Civil Engineering</button>
-          <button>Electrical Engineering</button>
-          <button>Mechanical Engineering</button>
-          <button>Software Engineering</button>
-          <button>Frontend Development</button>
+          <button onClick={()=>{          
+            navigate(`/searchcategory/Web Development`)}}>Web Development</button>
+          <button  onClick={()=>{
+            navigate(`/searchcategory/Data Science`)}}>Data Science</button>
+          <button  onClick={()=>{
+            setCategory("Digital Marketing")
+            navigate(`/searchcategory/Digital Marketing`)}}>Digital Marketing</button>
+          <button  onClick={()=>{
+            setCategory("Business")
+            navigate(`/searchcategory/Business`)}}>Business</button>
+          <button  onClick={()=>{
+            setCategory("Management")
+            navigate(`/searchcategory/Management`)}}>Management</button>
+          <button  onClick={()=>{
+            setCategory("Software Engineering")
+            navigate(`/searchcategory/Software Engineering`)}}>Software Engineering</button>
+          <button  onClick={()=>{
+            setCategory("Frontend Development")
+            navigate(`/searchcategory/Frontend Development`)}}>Frontend Development</button>
         </div>
 
        <MagicBento
@@ -135,6 +142,7 @@ const numLessons1 =
     );
 
     return (
+      
       <div
         className="course-card magic-bento-card"
         key={course.id}
