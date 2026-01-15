@@ -356,6 +356,32 @@ WHERE student = $1
     });
 
 }
+
+const getCourseByCategory = (req,res)=>{
+    const {category} = req.params;
+       pool
+    .query(
+   ` SELECT *
+FROM courses
+WHERE category = $1;`,
+   [category] )
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        category: result.rows,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
+
+}
+
 module.exports = {
   createNewCourse,
   getAllcourses,
@@ -369,6 +395,6 @@ module.exports = {
   getAllcoursesInstructors,
   getStudentsByInstructorId,
   getDitinctStudentsByInstructorId,
-  getCourseStudent
- 
+  getCourseStudent,
+  getCourseByCategory
 };

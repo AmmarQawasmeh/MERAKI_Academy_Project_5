@@ -46,7 +46,9 @@ body {
   height: 200px;
   object-fit: cover;
 }
-
+.unauth-card img:hover{
+  cursor: pointer;
+}
 .unauth-card h3 {
   font-size: 22px;
   margin: 15px 0 5px 0;
